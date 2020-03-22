@@ -8,7 +8,7 @@ module.exports = {
         this.app = app;
     },
 
-    //Gestión Usuarios
+    //Users management
     getUsers : function(criterion,funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -34,6 +34,43 @@ module.exports = {
             } else {
                 var collection = db.collection('users');
                 collection.insert(user, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
+    //Teams management
+    getTeams : function(criterion,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('teams');
+                collection.find(criterion).toArray(function(err, teams) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(teams);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
+    insertTeam : function(team, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('teams');
+                collection.insert(team, function(err, result) {
                     if (err) {
                         funcionCallback(null);
                     } else {

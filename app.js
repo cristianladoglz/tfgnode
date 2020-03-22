@@ -2,6 +2,8 @@
 var express = require('express');
 var app = express();
 
+app.use(express.static('public'));
+
 //Para tener acceso a req.session
 var expressSession = require('express-session');
 app.use(expressSession({
@@ -24,11 +26,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var DBManager = require("./modules/DBManager.js");
 DBManager.init(app,mongo);
 
-//Validator
-var validationManager = require("./modules/validationManager.js");
-validationManager.init(app,DBManager);
+//Validators
+var userValidationManager = require("./modules/userValidationManager.js");
+userValidationManager.init(app,DBManager);
 
-app.use(express.static('public'));
+var teamValidationManager = require("./modules/teamValidationManager.js");
+teamValidationManager.init(app,DBManager);
 
 // Variables
 app.set('port', 8080);
@@ -44,7 +47,8 @@ app.use( function (err, req, res, next ) {
   }
 });
 
-require("./routes/rusers.js")(app, swig, DBManager, validationManager);
+require("./routes/rusers.js")(app, swig, DBManager, userValidationManager);
+require("./routes/rteams.js")(app, swig, DBManager, teamValidationManager);
 
 app.listen(app.get('port'), function(){
   console.log("Servidor activo en el puerto "+app.get('port'));

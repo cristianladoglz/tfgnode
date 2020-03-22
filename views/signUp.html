@@ -5,23 +5,23 @@
 {% block contenido_principal %}
 <h2>Registrar usuario</h2>
 <form class="form-horizontal" method="post" action="/user" >
-    <div class="form-group">
+    <div class="form-group required">
         <label class="control-label col-sm-2" for="userName">Nombre de usuario:</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="userName" />
+            <input id="userName" type="text" class="form-control" name="userName" />
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group required">
         <label class="control-label col-sm-2" for="password">Contraseña:</label>
         <div class="col-sm-10">
-            <input type="password"  class="form-control" name="password"
+            <input id="password" type="password"  class="form-control" name="password"
                    placeholder="password" required="true" />
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group required">
         <label class="control-label col-sm-2" for="passwordConfirm">Repite contraseña:</label>
         <div class="col-sm-10">
-            <input type="password"  class="form-control" name="passwordConfirm"
+            <input id="passwordConfirm" type="password"  class="form-control" name="passwordConfirm"
                    placeholder="password" required="true" />
         </div>
     </div>

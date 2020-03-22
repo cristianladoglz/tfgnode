@@ -4,10 +4,10 @@
     <title>{% block titulo %} LiveBasket {% endblock %}</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel=”stylesheet” type=”text/css” src=”/public/stylesheets/style.css” />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" >
 </head>
 <body>
 
@@ -31,16 +31,16 @@
                     <span>{{ user.userName }}</span>
                 </li>
                 <li><a href="/">Home</a></li>
-                <li><a id="offerlist" href="/offer/list">Ofertas</a></li>
+                <li><a id="teamlist" href="/team/list">Equipos</a></li>
 
-                <li id="marks-menu" class="dropdown">
-                    <a id="offermanagement" class="dropdown-toggle"
-                       data-toggle="dropdown" href="#">Gestión de ofertas
+                <li id="teams-menu" class="dropdown">
+                    <a id="teammanagement" class="dropdown-toggle"
+                       data-toggle="dropdown" href="#">Gestión de equipos
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a id="addoffer" href="/offer/add">Añadir oferta</a></li>
-                        <li><a id="listmine" href="/offer/mine">Mis ofertas</a></li>
+                        <li><a id="addteam" href="/team/add">Crear equipo</a></li>
+                        <li><a id="listmyteams" href="/team/mine">Mis equipos</a></li>
                     </ul></li>
 
                 <li><a id="purchaselist" href="/purchases">Compras</a></li>
