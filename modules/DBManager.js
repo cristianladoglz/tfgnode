@@ -82,4 +82,40 @@ module.exports = {
         });
     },
 
+    getPlayers : function(criterion,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('players');
+                collection.find(criterion).toArray(function(err, players) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(players);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
+    insertPlayer : function(player, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('players');
+                collection.insert(player, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
 };

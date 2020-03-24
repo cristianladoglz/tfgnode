@@ -22,4 +22,17 @@ module.exports = {
         });
     },
 
+    playerAddition : function(player,funcionCallback) {
+        this.DBManager.getPlayers({teamName:player.teamName , playerBib:player.playerBib}, function(players) {
+            if (players.length > 0)
+                this.message="El dorsal ya existe en ese equipo";
+            if (player.playerName === "")
+                this.message="Campo jugador vacio";
+            if (player.teamName === "")
+                this.message="Campo equipo vacio";
+            funcionCallback(this.message);
+            this.message=null;
+        });
+    },
+
 };

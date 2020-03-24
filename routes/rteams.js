@@ -31,6 +31,42 @@ module.exports = function(app, swig, DBManager, validationManager) {
                 DBManager.insertTeam(team, function (id) {
                     if (id == null) {
                         res.redirect("/team/add?message=Error al crear equipo");
+                    }
+                    else {
+                        res.redirect("/player/add");
+                    }
+                });
+            }
+        });
+    });
+
+    app.get("/player/add", function(req,res) {
+        var respuesta = swig.renderFile('views/addPlayer.html', { user: req.session.usuario });
+        res.send(respuesta);
+    });
+
+    app.post("/player", function(req, res) {
+        var validatePlayer = {
+            teamName : req.body.teamName,
+            playerBib : req.body.bib
+        };
+
+        validationManager.playerAddition(validatePlayer,function(message){
+            if(message!=null) {
+                res.redirect("/player/add" +
+                    "?message=" + message +
+                    "&messageType=alert-danger");
+            }else {
+
+                var player = {
+                    teamName : req.body.teamName,
+                    playerName : req.body.player,
+                    playerBib : req.body.bib
+                };
+
+                DBManager.insertPlayer(player, function (id) {
+                    if (id == null) {
+                        res.redirect("/player/add?message=Error al insertar jugador");
                     } else {
                         res.redirect("/player/add");
                     }
@@ -39,4 +75,4 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
-}
+};
