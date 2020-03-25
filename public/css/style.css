@@ -6,3 +6,8 @@ div.form-group.required .control-label:after {
   font-size: large;
 }
 
+select {
+  width: 100%;
+  height: 3em;
+}
+

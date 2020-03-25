@@ -41,8 +41,16 @@ module.exports = function(app, swig, DBManager, validationManager) {
     });
 
     app.get("/player/add", function(req,res) {
-        var respuesta = swig.renderFile('views/addPlayer.html', { user: req.session.usuario });
-        res.send(respuesta);
+        var criterion={};
+
+        DBManager.getTeams(criterion, function(teams){
+            if(teams == null){
+                res.send("Error al obtener equipos");
+            } else {
+                var respuesta = showView('views/addPlayer.html', {teams : teams.reverse()}, req.session);
+                res.send(respuesta);
+            }
+        });
     });
 
     app.post("/player", function(req, res) {
