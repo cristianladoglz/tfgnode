@@ -33,9 +33,37 @@ module.exports = function(app, swig, DBManager, validationManager) {
                         res.redirect("/team/add?message=Error al crear equipo");
                     }
                     else {
-                        res.redirect("/player/add");
+                        res.redirect("/coach/add");
                     }
                 });
+            }
+        });
+    });
+
+    app.get("/coach/add", function(req,res) {
+        var criterion={};
+
+        DBManager.getTeams(criterion, function(teams){
+            if(teams == null){
+                res.send("Error al obtener equipos");
+            } else {
+                var respuesta = showView('views/addCoach.html', {teams : teams.reverse()}, req.session);
+                res.send(respuesta);
+            }
+        });
+    });
+
+    app.post("/coach", function(req, res) {
+        var coach = {
+            teamName : req.body.teamName,
+            coachName : req.body.coach
+        };
+
+        DBManager.insertCoach(coach, function (id) {
+            if (id == null) {
+                res.redirect("/coach/add?message=Error al insertar entrenador");
+            } else {
+                res.redirect("/player/add");
             }
         });
     });
