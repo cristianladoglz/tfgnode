@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/style.css" >
+    {% block scripts %} <script></script> {% endblock %}
 </head>
 <body>
 
@@ -31,7 +32,6 @@
                     <span>{{ user.userName }}</span>
                 </li>
                 <li><a href="/">Home</a></li>
-                <li><a id="teamlist" href="/team/list">Equipos</a></li>
 
                 <li id="teams-menu" class="dropdown">
                     <a id="teammanagement" class="dropdown-toggle"
@@ -40,7 +40,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a id="addteam" href="/team/add">Crear equipo</a></li>
-                        <li><a id="listmyteams" href="/team/mine">Mis equipos</a></li>
+                        <li><a id="teamlist" href="/team/list">Ver equipos</a></li>
                     </ul></li>
 
                 <li id="players-menu" class="dropdown">
@@ -52,7 +52,15 @@
                         <li><a id="addplayer" href="/player/add">Añadir jugador</a></li>
                     </ul></li>
 
-                <li><a id="purchaselist" href="/purchases">Compras</a></li>
+                <li id="matches-menu" class="dropdown">
+                    <a id="matchmanagement" class="dropdown-toggle"
+                       data-toggle="dropdown" href="#">Gestión de partidos
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a id="addmatch" href="/match/add">Crear partido</a></li>
+                        <li><a id="listmymatchs" href="/match/mine">Mis partidos</a></li>
+                    </ul></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">

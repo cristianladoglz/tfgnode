@@ -75,7 +75,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
             if(teams == null){
                 res.send("Error al obtener equipos");
             } else {
-                var respuesta = showView('views/addPlayer.html', {teams : teams.reverse()}, req.session);
+                var respuesta = showView('views/addPlayer.html', {teams: teams.reverse()}, req.session);
                 res.send(respuesta);
             }
         });

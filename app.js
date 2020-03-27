@@ -33,6 +33,9 @@ userValidationManager.init(app,DBManager);
 var teamValidationManager = require("./modules/teamValidationManager.js");
 teamValidationManager.init(app,DBManager);
 
+var matchValidationManager = require("./modules/matchValidationManager.js");
+matchValidationManager.init(app,DBManager);
+
 // Variables
 app.set('port', 8080);
 app.set('db', 'mongodb://uo257126:uo257126tfg@tfgbasket-shard-00-00-ztapo.mongodb.net:27017,tfgbasket-shard-00-01-ztapo.mongodb.net:27017,tfgbasket-shard-00-02-ztapo.mongodb.net:27017/test?ssl=true&replicaSet=tfgbasket-shard-0&authSource=admin&retryWrites=true&w=majority');
@@ -47,8 +50,10 @@ app.use( function (err, req, res, next ) {
   }
 });
 
+require("./routes/rhome.js")(app, swig);
 require("./routes/rusers.js")(app, swig, DBManager, userValidationManager);
 require("./routes/rteams.js")(app, swig, DBManager, teamValidationManager);
+require("./routes/rmatches.js")(app, swig, DBManager, matchValidationManager);
 
 app.listen(app.get('port'), function(){
   console.log("Servidor activo en el puerto "+app.get('port'));
