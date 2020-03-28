@@ -137,6 +137,24 @@ module.exports = {
     },
 
     //Matches management
+    getMatches : function(criterion,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('matches');
+                collection.find(criterion).toArray(function(err, matches) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(matches);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
     insertMatch : function(match, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -148,6 +166,24 @@ module.exports = {
                         funcionCallback(null);
                     } else {
                         funcionCallback(result.ops[0]._id);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
+    modifyMatch : function(criterion, match, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('matches');
+                collection.update(criterion, {$set: match}, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result);
                     }
                     db.close();
                 });

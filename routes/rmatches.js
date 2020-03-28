@@ -66,4 +66,38 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    app.get("/match/mine", function(req, res) {
+        var criterion={};
+
+        DBManager.getMatches(criterion, function(matches) {
+            if (matches == null) {
+                res.send("Error al listar partidos");
+            } else {
+                var respuesta = showView('views/myMatches.html', {matches : matches}, req.session);
+                res.send(respuesta);
+            }
+        });
+    });
+
+    app.get('/match/activate/:id', function (req, res) {
+        var matchId = DBManager.mongo.ObjectID(req.params.id);
+        var user=req.session.usuario;
+        var criterion={_id:matchId};
+
+        DBManager.getMatches(criterion, function(matches){
+
+            var matchCriterion = {"_id": matchId};
+            var match = {
+                state: "active"
+            };
+            DBManager.modifyMatch(matchCriterion, match, function (result) {
+                if (result == null) {
+                    res.send("Error al actualizar el partido como activo");
+                } else {
+                    res.redirect("/match/mine");
+                }
+            });
+        });
+    });
+
 };
