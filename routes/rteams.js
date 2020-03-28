@@ -54,16 +54,29 @@ module.exports = function(app, swig, DBManager, validationManager) {
     });
 
     app.post("/coach", function(req, res) {
-        var coach = {
-            teamName : req.body.teamName,
-            coachName : req.body.coach
-        };
+        var validateCoach = {
+            teamName : req.body.teamName
+        }
 
-        DBManager.insertCoach(coach, function (id) {
-            if (id == null) {
-                res.redirect("/coach/add?message=Error al insertar entrenador");
+        validationManager.coachAddition(validateCoach,function(message){
+            if(message!=null) {
+                res.redirect("/coach/add" +
+                    "?message=" + message +
+                    "&messageType=alert-danger");
             } else {
-                res.redirect("/player/add");
+
+                var coach = {
+                    teamName: req.body.teamName,
+                    coachName: req.body.coach
+                };
+
+                DBManager.insertCoach(coach, function (id) {
+                    if (id == null) {
+                        res.redirect("/coach/add?message=Error al insertar entrenador");
+                    } else {
+                        res.redirect("/player/add?message=Entrenador añadido");
+                    }
+                });
             }
         });
     });
@@ -104,7 +117,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
                     if (id == null) {
                         res.redirect("/player/add?message=Error al insertar jugador");
                     } else {
-                        res.redirect("/player/add");
+                        res.redirect("/player/add?message=Jugador añadido");
                     }
                 });
             }

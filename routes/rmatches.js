@@ -33,14 +33,12 @@ module.exports = function(app, swig, DBManager, validationManager) {
             }else {
 
                 var tableOfficial="";
-                var court="";
-
-                console.log(req.body.court);
+                var court=req.body.courtSelect.valueOf();
 
                 if(req.body.tableOfficial.valueOf()!=="none")
                     tableOfficial=req.body.tableOfficial.valueOf().toString();
 
-                if(req.body.courtSelect.valueOf()==="otro")
+                if(court==="otro")
                     court=req.body.court;
 
                 var match = {
@@ -53,7 +51,8 @@ module.exports = function(app, swig, DBManager, validationManager) {
                     date : req.body.date,
                     time : req.body.time,
                     court : court,
-                    tableOfficial : tableOfficial
+                    tableOfficial : tableOfficial,
+                    state : "created"
                 };
 
                 DBManager.insertMatch(match, function (id) {

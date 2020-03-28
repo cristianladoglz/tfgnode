@@ -26,10 +26,10 @@ module.exports = {
                     if (match.matchCourt.valueOf().toString()!="otro" && teams.length == 0)
                         msg = "El nombre del lugar no existe";
                     funcionCallback(msg);
-                    msg = null;
                 });
             });
         });
+        this.message=null;
     },
 
 };

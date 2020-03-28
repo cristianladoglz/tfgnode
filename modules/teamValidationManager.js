@@ -22,17 +22,33 @@ module.exports = {
         });
     },
 
-    playerAddition : function(player,funcionCallback) {
-        this.DBManager.getPlayers({teamName:player.teamName , playerBib:player.playerBib}, function(players) {
-            if (players.length > 0)
-                this.message="El dorsal ya existe en ese equipo";
-            if (player.playerName === "")
-                this.message="Campo jugador vacio";
-            if (player.teamName === "")
-                this.message="Campo equipo vacio";
+    coachAddition : function(coach,funcionCallback) {
+        this.DBManager.getTeams({teamName : coach.teamName}, function(teams) {
+            if (teams.length == 0)
+                this.message="El equipo no existe";
             funcionCallback(this.message);
             this.message=null;
         });
+    },
+
+    playerAddition : function(player,funcionCallback) {
+        var dbManager = this.DBManager;
+        var msg = this.message;
+
+        this.DBManager.getPlayers({teamName:player.teamName , playerBib:player.playerBib}, function(players) {
+            dbManager.getTeams({teamName: player.teamName} , function(teams){
+                if (players.length > 0)
+                    msg="El dorsal ya existe en ese equipo";
+                if (player.playerName === "")
+                    msg="Campo jugador vacio";
+                if (player.teamName === "")
+                    msg="Campo equipo vacio";
+                if (teams.length == 0)
+                    msg="El equipo no existe";
+                funcionCallback(msg);
+            });
+        });
+        this.message=null;
     },
 
 };
