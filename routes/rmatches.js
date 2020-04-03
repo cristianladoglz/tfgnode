@@ -22,7 +22,8 @@ module.exports = function(app, swig, DBManager, validationManager) {
         var validateMatch = {
             localTeam : req.body.local.valueOf(),
             visitorTeam : req.body.visitor.valueOf(),
-            matchCourt : req.body.courtSelect.valueOf()
+            matchCourt : req.body.courtSelect.valueOf(),
+            runningTime : req.body.runningTime.valueOf()
         };
 
         validationManager.matchCreation(validateMatch,function(message){
@@ -46,6 +47,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
                     visitorTeam : req.body.visitor.valueOf(),
                     quartersNumber : req.body.quarter,
                     durationQuarter : req.body.duration,
+                    runningTime : req.body.runningTime.valueOf(),
                     timeOuts : req.body.timeOut,
                     maxPersonalFouls : req.body.personalFoul,
                     date : req.body.date,

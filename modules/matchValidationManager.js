@@ -17,6 +17,9 @@ module.exports = {
             if (match.localTeam == match.visitorTeam) {
                 msg = "Los nombres de los equipos son iguales";
             }
+            if (match.runningTime!="yes" && match.runningTime!="no"){
+                msg = "La opción de tiempo corrido no está bien seleccionada";
+            }
             if (teams.length == 0)
                 msg = "El nombre del equipo local no existe";
             dbManager.getTeams({teamName: match.visitorTeam}, function (teams) {
