@@ -16,7 +16,10 @@ module.exports = function(app, swig, DBManager) {
                 })
             } else {
                 res.status(200);
-                res.send(JSON.stringify(matches));
+                res.send("{"+
+                    '"activeMatches":'+
+                    JSON.stringify(matches)+
+                    "}");
             }
         });
     });

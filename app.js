@@ -19,8 +19,8 @@ var mongo = require('mongodb');
 var swig  = require('swig');
 
 var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 //Database
 var DBManager = require("./modules/DBManager.js");

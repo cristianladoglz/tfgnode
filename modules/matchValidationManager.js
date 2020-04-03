@@ -17,7 +17,7 @@ module.exports = {
             if (match.localTeam == match.visitorTeam) {
                 msg = "Los nombres de los equipos son iguales";
             }
-            if (match.runningTime!="yes" && match.runningTime!="no"){
+            if (match.runningTime!="true" && match.runningTime!="false"){
                 msg = "La opción de tiempo corrido no está bien seleccionada";
             }
             if (teams.length == 0)

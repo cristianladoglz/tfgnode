@@ -42,14 +42,16 @@ module.exports = function(app, swig, DBManager, validationManager) {
                 if(court==="otro")
                     court=req.body.court;
 
+                var runningTime = req.body.runningTime.valueOf() === "true";
+
                 var match = {
                     localTeam : req.body.local.valueOf(),
                     visitorTeam : req.body.visitor.valueOf(),
-                    quartersNumber : req.body.quarter,
-                    durationQuarter : req.body.duration,
-                    runningTime : req.body.runningTime.valueOf(),
-                    timeOuts : req.body.timeOut,
-                    maxPersonalFouls : req.body.personalFoul,
+                    quartersNumber : parseInt(req.body.quarter),
+                    durationQuarter : parseInt(req.body.duration),
+                    runningTime : runningTime,
+                    timeOuts : parseInt(req.body.timeOut),
+                    maxPersonalFouls : parseInt(req.body.personalFoul),
                     date : req.body.date,
                     time : req.body.time,
                     court : court,
