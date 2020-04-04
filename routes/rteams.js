@@ -110,7 +110,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
                 var player = {
                     teamName : req.body.teamName,
                     playerName : req.body.player,
-                    playerBib : req.body.bib
+                    playerBib : parseInt(req.body.bib)
                 };
 
                 DBManager.insertPlayer(player, function (id) {
