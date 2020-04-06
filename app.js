@@ -2,6 +2,9 @@
 var express = require('express');
 var app = express();
 
+var http = require('http').createServer(app);
+var io = require('socket.io')(http);
+
 app.use(express.static('public'));
 
 //Para tener acceso a req.session
@@ -54,7 +57,7 @@ require("./routes/rhome.js")(app, swig);
 require("./routes/rusers.js")(app, swig, DBManager, userValidationManager);
 require("./routes/rteams.js")(app, swig, DBManager, teamValidationManager);
 require("./routes/rmatches.js")(app, swig, DBManager, matchValidationManager);
-require("./routes/rapirest.js")(app, swig, DBManager);
+require("./routes/rapirest.js")(app, swig, DBManager, io);
 
 app.listen(app.get('port'), function(){
   console.log("Servidor activo en el puerto "+app.get('port'));

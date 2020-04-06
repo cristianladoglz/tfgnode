@@ -1,4 +1,4 @@
-module.exports = function(app, swig, DBManager) {
+module.exports = function(app, swig, DBManager, io) {
 
     /**
      * Return a list with active matches
