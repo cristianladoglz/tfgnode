@@ -48,4 +48,32 @@ module.exports = function(app, swig, DBManager, io) {
         });
     });
 
+    /**
+     * Start a match
+     */
+    app.put("/api/start/match/:id", function(req, res) {
+        var criterion = {
+            _id : DBManager.mongo.ObjectID(req.params.id)
+        };
+
+        DBManager.getMatches(criterion, function(matches){
+            if(matches[0]!==null){
+                var state={ state : "playing" };
+                DBManager.modifyMatch(criterion, state,function(result){
+                    if (result == null) {
+                        res.status(500);
+                        res.json({
+                            error : "Se ha producido un error"
+                        })
+                    } else {
+                        res.status(200);
+                        res.json({
+                            mensaje : "Partido en juego"
+                        })
+                    }
+                });
+            }
+        });
+    });
+
 };
