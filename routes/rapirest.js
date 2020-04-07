@@ -182,11 +182,18 @@ module.exports = function(app, swig, DBManager, io) {
                     error: "Se ha producido un error"
                 })
             } else {
+                var playerId = "";
+                if(req.body.playerId!=="")
+                    payerId = DBManager.mongo.ObjectID(req.body.playerId);
+
                 var addPoints = {
                     matchId: DBManager.mongo.ObjectID(req.body.matchId),
                     time: req.body.time,
-                    player: req.body.player,
-                    points: req.body.points,
+                    playerId: playerId,
+                    playerName: req.body.playerName,
+                    playerBib: req.body.playerBib,
+                    teamId: DBManager.mongo.ObjectID(req.body.teamId),
+                    points: parseInt(req.body.points),
                     eventType: "addPoints"
                 };
                 DBManager.insertEvent(addPoints, function (newEvent) {
