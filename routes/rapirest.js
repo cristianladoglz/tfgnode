@@ -140,7 +140,7 @@ module.exports = function(app, swig, DBManager, io) {
     });
 
     /**
-     * Add new event stop
+     * Add new event resume
      */
     app.post("/api/add/resume", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
@@ -156,6 +156,40 @@ module.exports = function(app, swig, DBManager, io) {
                     eventType: "resume"
                 };
                 DBManager.insertEvent(resume, function (newEvent) {
+                    if (newEvent == null) {
+                        res.status(500);
+                        res.json({
+                            error: "Se ha producido un error"
+                        })
+                    } else {
+                        res.status(201);
+                        res.send(JSON.stringify(newEvent));
+                    }
+
+                });
+            }
+        });
+    });
+
+    /**
+     * Add new event addPoints
+     */
+    app.post("/api/add/points", function(req, res) {
+        DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
+            if (matches == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                var addPoints = {
+                    matchId: DBManager.mongo.ObjectID(req.body.matchId),
+                    time: req.body.time,
+                    player: req.body.player,
+                    points: req.body.points,
+                    eventType: "addPoints"
+                };
+                DBManager.insertEvent(addPoints, function (newEvent) {
                     if (newEvent == null) {
                         res.status(500);
                         res.json({
