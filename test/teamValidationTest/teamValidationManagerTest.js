@@ -77,7 +77,25 @@ describe('Team creation', function() {
                                                                                                     teamValidationManager.playerAddition(correctPlayer, function(msg){
                                                                                                         assert.equal(msg, null);
 
-                                                                                                        console.log("FINISH TEST");
+                                                                                                        describe('Negative player bib', function() {
+                                                                                                            var correctPlayer = { teamName : "test",
+                                                                                                                playerName : "correctPlayer",
+                                                                                                                playerBib : parseInt("-1") };
+                                                                                                            teamValidationManager.playerAddition(correctPlayer, function(msg){
+                                                                                                                assert.equal(msg, "Dorsal negativo");
+
+                                                                                                                describe('Player bib greater than 99', function() {
+                                                                                                                    var correctPlayer = { teamName : "test",
+                                                                                                                        playerName : "correctPlayer",
+                                                                                                                        playerBib : parseInt("100") };
+                                                                                                                    teamValidationManager.playerAddition(correctPlayer, function(msg){
+                                                                                                                        assert.equal(msg, "Dorsal mayor que 99");
+
+                                                                                                                        console.log("FINISH TEST");
+                                                                                                                    });
+                                                                                                                });
+                                                                                                            });
+                                                                                                        });
                                                                                                     });
                                                                                                 });
                                                                                             });
