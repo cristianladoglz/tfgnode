@@ -25,7 +25,11 @@ module.exports = {
     coachAddition : function(coach,funcionCallback) {
         this.DBManager.getTeams({teamName : coach.teamName}, function(teams) {
             if (teams.length == 0)
-                this.message="El equipo no existe";
+                this.message = "El equipo no existe";
+            else if (coach.coachName == "")
+                this.message = "Campo nombre de entrenador vacio";
+            else
+                this.message = null;
             funcionCallback(this.message);
         });
         this.message=null;
@@ -38,9 +42,13 @@ module.exports = {
         this.DBManager.getPlayers({teamName:player.teamName , playerBib:player.playerBib}, function(players) {
             dbManager.getTeams({teamName: player.teamName} , function(teams){
                 if (players.length > 0)
-                    msg="El dorsal ya existe en ese equipo";
-                if (teams.length == 0)
-                    msg="El equipo no existe";
+                    msg = "El dorsal ya existe en ese equipo";
+                else if (teams.length == 0)
+                    msg = "El equipo no existe";
+                else if (player.playerName == "")
+                    msg = "Campo nombre de jugador vacio";
+                else
+                    msg = null;
                 funcionCallback(msg);
             });
         });
