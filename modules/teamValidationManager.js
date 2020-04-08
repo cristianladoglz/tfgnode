@@ -10,7 +10,7 @@ module.exports = {
     },
 
     teamCreation : function(team,funcionCallback) {
-        this.DBManager.getTeams({teamName:team.teamName , teamCourt:team.teamCourt}, function(teams) {
+        this.DBManager.getTeams({teamName:team.teamName}, function(teams) {
             if (teams.length > 0)
                 this.message="El nombre de equipo ya existe";
             if (team.teamName === "")
@@ -18,8 +18,8 @@ module.exports = {
             if(team.teamCourt==="")
                 this.message="Campo cancha vacio";
             funcionCallback(this.message);
-            this.message=null;
         });
+        this.message=null;
     },
 
     coachAddition : function(coach,funcionCallback) {
@@ -27,8 +27,8 @@ module.exports = {
             if (teams.length == 0)
                 this.message="El equipo no existe";
             funcionCallback(this.message);
-            this.message=null;
         });
+        this.message=null;
     },
 
     playerAddition : function(player,funcionCallback) {
@@ -39,10 +39,6 @@ module.exports = {
             dbManager.getTeams({teamName: player.teamName} , function(teams){
                 if (players.length > 0)
                     msg="El dorsal ya existe en ese equipo";
-                if (player.playerName === "")
-                    msg="Campo jugador vacio";
-                if (player.teamName === "")
-                    msg="Campo equipo vacio";
                 if (teams.length == 0)
                     msg="El equipo no existe";
                 funcionCallback(msg);

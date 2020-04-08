@@ -62,3 +62,8 @@ require("./routes/rapirest.js")(app, swig, DBManager, io);
 app.listen(app.get('port'), function(){
   console.log("Servidor activo en el puerto "+app.get('port'));
 });
+
+module.exports = {
+  app,
+  mongo
+};
