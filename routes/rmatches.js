@@ -54,7 +54,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
                     maxPersonalFouls : parseInt(req.body.personalFoul),
                     date : req.body.date,
                     time : req.body.time,
-                    court : court,
+                    matchCourt : court,
                     tableOfficial : tableOfficial,
                     state : "created"
                 };

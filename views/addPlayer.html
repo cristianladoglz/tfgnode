@@ -17,7 +17,9 @@
         <div class="col-sm-10">
             <select id="teamName" name="teamName" class="col-12">
                 {% for team in teams %}
-                    <option value="{{ team.teamName }}" >{{ team.teamName }}</option>
+                    {% if team.teamName != 'test' && team.teamName != 'test2' %}
+                        <option value="{{ team.teamName }}" >{{ team.teamName }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>

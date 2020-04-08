@@ -91,7 +91,7 @@ describe('Team creation', function() {
                                                                                                                     teamValidationManager.playerAddition(correctPlayer, function(msg){
                                                                                                                         assert.equal(msg, "Dorsal mayor que 99");
 
-                                                                                                                        console.log("FINISH TEST");
+                                                                                                                        console.log("FINISH TEAM VALIDATION TEST");
                                                                                                                     });
                                                                                                                 });
                                                                                                             });
