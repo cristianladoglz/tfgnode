@@ -59,6 +59,8 @@ require("./routes/rteams.js")(app, swig, DBManager, teamValidationManager);
 require("./routes/rmatches.js")(app, swig, DBManager, matchValidationManager);
 require("./routes/rapirest.js")(app, swig, DBManager, io);
 
+require("./rellenarDB.js")(app, swig, DBManager);
+
 app.listen(app.get('port'), function(){
   console.log("Servidor activo en el puerto "+app.get('port'));
 });

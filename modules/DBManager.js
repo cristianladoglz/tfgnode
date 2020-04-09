@@ -8,6 +8,27 @@ module.exports = {
         this.app = app;
     },
 
+    resetDB : function (funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var users=db.collection('users');
+                var teams=db.collection('teams');
+                var coaches=db.collection('coaches');
+                var players=db.collection('players');
+                var matches=db.collection('matches');
+                var events=db.collection('events');
+                users.remove({});
+                teams.remove({});
+                coaches.remove({});
+                players.remove({});
+                matches.remove({});
+                events.remove({});
+            }
+        });
+    },
+
     //Users management
     getUsers : function(criterion,funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
