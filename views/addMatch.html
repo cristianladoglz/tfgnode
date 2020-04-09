@@ -10,7 +10,9 @@
         <div class="col-sm-10">
             <select id="local" name="local" class="col-12">
                 {% for team in teams %}
-                <option value="{{ team.teamName }}" >{{ team.teamName }}</option>
+                    {% if team.teamName != 'test' && team.teamName != 'test2' %}
+                        <option value="{{ team.teamName }}" >{{ team.teamName }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>
@@ -20,7 +22,9 @@
         <div class="col-sm-10">
             <select id="visitor" name="visitor" class="col-12">
                 {% for team in teams %}
-                <option value="{{ team.teamName }}" >{{ team.teamName }}</option>
+                    {% if team.teamName != 'test' && team.teamName != 'test2' %}
+                        <option value="{{ team.teamName }}" >{{ team.teamName }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
         </div>
@@ -80,7 +84,9 @@
             <select id="courtSelect" name="courtSelect" class="col-12"
                     onchange="if(this.value=='otro') {document.getElementById('court').disabled = false} else {document.getElementById('court').disabled = true} ">
                 {% for team in teams %}
-                <option value="{{ team.teamCourt }}" >{{ team.teamCourt }}</option>
+                    {% if team.teamCourt != 'test' && team.teamCourt != 'test2' %}
+                        <option value="{{ team.teamCourt }}" >{{ team.teamCourt }}</option>
+                    {% endif %}
                 {% endfor %}
                 <option value="otro" >Otro</option>
             </select>
