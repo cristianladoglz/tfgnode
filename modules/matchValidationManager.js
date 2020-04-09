@@ -24,12 +24,10 @@ module.exports = {
                 msg = "La duración de cada cuarto debe ser máximo de 60 minutos";
             if(match.durationQuarter === "")
                 msg = "Duración de cada cuarto vacío";
-            if (match.localTeam === match.visitorTeam) {
+            if (match.localTeam === match.visitorTeam)
                 msg = "Los nombres de los equipos son iguales";
-            }
-            if (match.runningTime!=="true" && match.runningTime!=="false"){
+            if (match.runningTime!=="true" && match.runningTime!=="false")
                 msg = "La opción de tiempo corrido no está bien seleccionada";
-            }
             if(match.timeout < 0)
                 msg = "El número de tiempos muertos no puede ser negativo";
             if(match.timeout === "")
@@ -40,6 +38,10 @@ module.exports = {
                 msg = "Máximo de faltas personales vacío";
             if (teams.length === 0)
                 msg = "El nombre del equipo local no existe";
+            if (match.date === "")
+                msg = "La fecha está vacía";
+            if (match.time === "")
+                msg = "La hora está vacía";
             dbManager.getTeams({teamName: match.visitorTeam}, function (teams) {
                 if (teams.length === 0)
                     msg = "El nombre del equipo visitante no existe";
