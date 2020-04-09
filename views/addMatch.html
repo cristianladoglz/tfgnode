@@ -47,8 +47,8 @@
         <label class="control-label col-sm-2" for="runningTime">Tiempo corrido:</label>
         <div class="col-sm-10">
             <select id="runningTime" name="runningTime" class="col-12">
-                <option value="true" >Sí</option>
-                <option value="false" >No</option>
+                <option name="true" value="true" >Sí</option>
+                <option name="false" value="false" >No</option>
             </select>
         </div>
     </div>
@@ -85,7 +85,7 @@
                     onchange="if(this.value=='otro') {document.getElementById('court').disabled = false} else {document.getElementById('court').disabled = true} ">
                 {% for team in teams %}
                     {% if team.teamCourt != 'test' && team.teamCourt != 'test2' %}
-                        <option value="{{ team.teamCourt }}" >{{ team.teamCourt }}</option>
+                        <option name="{{ team.teamCourt }}" value="{{ team.teamCourt }}" >{{ team.teamCourt }}</option>
                     {% endif %}
                 {% endfor %}
                 <option value="otro" >Otro</option>
@@ -102,7 +102,7 @@
         <label class="control-label col-sm-2" for="tableOfficial">Oficial de mesa:</label>
         <div class="col-sm-10">
             <select id="tableOfficial" name="tableOfficial" class="col-12">
-                <option value="none" >Sin asignar</option>
+                <option name="Sin asignar" value="none" >Sin asignar</option>
             </select>
         </div>
     </div>
