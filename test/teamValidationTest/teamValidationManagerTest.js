@@ -52,7 +52,7 @@ describe('Team creation', function() {
                                                                         describe('Existing bib', function() {
                                                                             var repeatedBib = { teamName : "test",
                                                                                 playerName : "correctPlayer",
-                                                                                playerBib : parseInt("00") };
+                                                                                playerBib : parseInt("0") };
                                                                             teamValidationManager.playerAddition(repeatedBib, function(msg){
                                                                                 assert.equal(msg, "El dorsal ya existe en ese equipo");
 

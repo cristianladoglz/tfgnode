@@ -18,7 +18,7 @@
             <select id="teamName" name="teamName" class="col-12">
                 {% for team in teams %}
                     {% if team.teamName != 'test' && team.teamName != 'test2' %}
-                        <option value="{{ team.teamName }}" >{{ team.teamName }}</option>
+                        <option name="{{ team.teamName }}" value="{{ team.teamName }}" >{{ team.teamName }}</option>
                     {% endif %}
                 {% endfor %}
             </select>

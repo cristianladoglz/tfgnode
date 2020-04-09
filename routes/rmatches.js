@@ -63,7 +63,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
                     if (id == null) {
                         res.redirect("/match/add?message=Error al insertar partido");
                     } else {
-                        res.redirect("/match/add?message=Partido creado correctamente");
+                        res.redirect("/match/mine?message=Partido creado correctamente");
                     }
                 });
             }
