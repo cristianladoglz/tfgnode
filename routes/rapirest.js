@@ -212,4 +212,45 @@ module.exports = function(app, swig, DBManager, io) {
         });
     });
 
+    /**
+     * Add new event subPoints
+     */
+    app.post("/api/sub/points", function(req, res) {
+        DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
+            if (matches == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                var idPlayer = "";
+                if(req.body.playerId!=="")
+                    idPlayer = DBManager.mongo.ObjectID(req.body.playerId);
+
+                var subPoints = {
+                    matchId: DBManager.mongo.ObjectID(req.body.matchId),
+                    time: req.body.time,
+                    playerId: idPlayer,
+                    playerName: req.body.playerName,
+                    playerBib: req.body.playerBib,
+                    teamId: DBManager.mongo.ObjectID(req.body.teamId),
+                    points: parseInt(req.body.points),
+                    eventType: "subPoints"
+                };
+                DBManager.insertEvent(subPoints, function (newEvent) {
+                    if (newEvent == null) {
+                        res.status(500);
+                        res.json({
+                            error: "Se ha producido un error"
+                        })
+                    } else {
+                        res.status(201);
+                        res.send(JSON.stringify(newEvent));
+                    }
+
+                });
+            }
+        });
+    });
+
 };
