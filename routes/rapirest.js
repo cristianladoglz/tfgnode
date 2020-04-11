@@ -25,6 +25,30 @@ module.exports = function(app, swig, DBManager, io) {
     });
 
     /**
+     * Return the team id
+     */
+    app.get("/api/team/:teamName", function(req, res) {
+        var criterion = {
+            teamName: req.params.teamName
+        };
+
+        DBManager.getTeams(criterion, function (teams) {
+            if (teams == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                res.status(200);
+                res.send("{"+
+                    '"teams":'+
+                    JSON.stringify(teams)+
+                    "}");
+            }
+        });
+    });
+
+    /**
      * Return a list with team players
      */
     app.get("/api/players/:teamName", function(req, res) {
