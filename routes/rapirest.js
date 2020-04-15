@@ -793,4 +793,36 @@ module.exports = function(app, swig, DBManager, io) {
         });
     });
 
+    /**
+     * Add new event finishQuarter
+     */
+    app.post("/api/add/finishQuarter", function(req, res) {
+        DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
+            if (matches == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                var finishQuarter = {
+                    matchId: DBManager.mongo.ObjectID(req.body.matchId),
+                    quarter : req.body.quarter,
+                    eventType: "finishQuarter"
+                };
+                DBManager.insertEvent(finishQuarter, function (newEvent) {
+                    if (newEvent == null) {
+                        res.status(500);
+                        res.json({
+                            error: "Se ha producido un error"
+                        })
+                    } else {
+                        res.status(201);
+                        res.send(JSON.stringify(newEvent));
+                    }
+
+                });
+            }
+        });
+    });
+
 };
