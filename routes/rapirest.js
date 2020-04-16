@@ -825,4 +825,36 @@ module.exports = function(app, swig, DBManager, io) {
         });
     });
 
+    /**
+     * Add new event startQuarter
+     */
+    app.post("/api/add/startQuarter", function(req, res) {
+        DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
+            if (matches == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                var startQuarter = {
+                    matchId: DBManager.mongo.ObjectID(req.body.matchId),
+                    quarter : req.body.quarter,
+                    eventType: "startQuarter"
+                };
+                DBManager.insertEvent(startQuarter, function (newEvent) {
+                    if (newEvent == null) {
+                        res.status(500);
+                        res.json({
+                            error: "Se ha producido un error"
+                        })
+                    } else {
+                        res.status(201);
+                        res.send(JSON.stringify(newEvent));
+                    }
+
+                });
+            }
+        });
+    });
+
 };

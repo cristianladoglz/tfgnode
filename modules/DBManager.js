@@ -103,6 +103,24 @@ module.exports = {
         });
     },
 
+    getCoaches : function(criterion,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('coaches');
+                collection.find(criterion).toArray(function(err, coaches) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(coaches);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
     insertCoach : function(coach, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
