@@ -857,4 +857,67 @@ module.exports = function(app, swig, DBManager, io) {
         });
     });
 
+    /**
+     * Add new event finish
+     */
+    app.post("/api/add/finish", function(req, res) {
+        DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
+            if (matches == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                var finish = {
+                    matchId: DBManager.mongo.ObjectID(req.body.matchId),
+                    eventType: "finish"
+                };
+                DBManager.insertEvent(finish, function (newEvent) {
+                    if (newEvent == null) {
+                        res.status(500);
+                        res.json({
+                            error: "Se ha producido un error"
+                        })
+                    } else {
+                        res.status(201);
+                        res.send(JSON.stringify(newEvent));
+                    }
+
+                });
+            }
+        });
+    });
+
+    /**
+     * Finish a match
+     */
+    app.put("/api/finish/match/:id", function(req, res) {
+        var criterion = {
+            _id : DBManager.mongo.ObjectID(req.params.id)
+        };
+
+        DBManager.getMatches(criterion, function(matches){
+            if(matches[0]!==null){
+                var state={
+                    state : "finished",
+                    localPoints : req.body.localPoints,
+                    visitorPoints : req.body.visitorPoints
+                };
+                DBManager.modifyMatch(criterion, state,function(result){
+                    if (result == null) {
+                        res.status(500);
+                        res.json({
+                            error : "Se ha producido un error"
+                        })
+                    } else {
+                        res.status(200);
+                        res.json({
+                            mensaje : "Partido en juego"
+                        })
+                    }
+                });
+            }
+        });
+    });
+
 };
