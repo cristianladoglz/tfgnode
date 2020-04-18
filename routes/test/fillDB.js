@@ -98,7 +98,7 @@ module.exports = function(app, swig, DBManager) {
             localTeam : "Sanfer",
             visitorTeam : "ADBA",
             quartersNumber : 4,
-            durationQuarter : 10,
+            durationQuarter : 1,
             runningTime : false,
             timeOuts : 2,
             maxPersonalFouls : 5,
