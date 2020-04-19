@@ -19,12 +19,14 @@ module.exports = {
                 var players=db.collection('players');
                 var matches=db.collection('matches');
                 var events=db.collection('events');
+                var records=db.collection('records');
                 users.remove({});
                 teams.remove({});
                 coaches.remove({});
                 players.remove({});
                 matches.remove({});
                 events.remove({});
+                records.remove({});
             }
         });
     },
@@ -223,6 +225,24 @@ module.exports = {
                         funcionCallback(null);
                     } else {
                         funcionCallback(result);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
+    recordMatch : function(record, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('records');
+                collection.insert(record, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result.ops[0]._id);
                     }
                     db.close();
                 });

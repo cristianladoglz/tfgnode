@@ -912,7 +912,7 @@ module.exports = function(app, swig, DBManager, io) {
                     } else {
                         res.status(200);
                         res.json({
-                            mensaje : "Partido en juego"
+                            mensaje : "Partido finalizado"
                         })
                     }
                 });
@@ -962,6 +962,46 @@ module.exports = function(app, swig, DBManager, io) {
                         res.send(JSON.stringify(newEvent));
                     }
 
+                });
+            }
+        });
+    });
+
+    /**
+     * Record finish match summary
+     */
+    app.post("/api/record/match/:id", function(req, res) {
+        var criterion = {
+            _id : DBManager.mongo.ObjectID(req.params.id)
+        };
+
+        DBManager.getMatches(criterion, function(matches){
+            if(matches[0]!==null){
+                var idPlayer = "";
+                if(req.body.playerId!=="")
+                    idPlayer = DBManager.mongo.ObjectID(req.body.playerId);
+
+                var record={
+                    matchId : DBManager.mongo.ObjectID(req.params.id),
+                    playerId : idPlayer,
+                    playerName : req.body.playerName,
+                    playerBib : req.body.playerBib,
+                    teamId : DBManager.mongo.ObjectID(req.body.teamId),
+                    points : req.body.points,
+                    personalFouls : req.body.personalFouls,
+                    technicalFouls : req.body.technicalFouls,
+                    unsportmanlikeFouls : req.body.unsportmanlikeFouls
+                };
+                DBManager.recordMatch(record,function(result){
+                    if (result == null) {
+                        res.status(500);
+                        res.json({
+                            error : "Se ha producido un error"
+                        })
+                    } else {
+                        res.status(201);
+                        res.send(JSON.stringify(record));
+                    }
                 });
             }
         });

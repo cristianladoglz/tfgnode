@@ -133,7 +133,8 @@ module.exports = function(app, swig, DBManager) {
                                                                         coaches: "entrenadores insertados",
                                                                         players: "jugadores insertados",
                                                                         matches: "partidos insertados",
-                                                                        events: "eventos insertados"
+                                                                        events: "eventos insertados",
+                                                                        records: "historial insertado"
                                                                     });
                                                                 });
                                                             });
