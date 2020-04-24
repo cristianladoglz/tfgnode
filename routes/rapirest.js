@@ -25,6 +25,30 @@ module.exports = function(app, swig, DBManager, io) {
     });
 
     /**
+     * Return a list with all matches visible
+     */
+    app.get("/api/allMatchesVisible", function(req, res) {
+        var criterion = {
+            state: {$ne: "created"}
+        };
+
+        DBManager.getMatches(criterion, function (matches) {
+            if (matches == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                res.status(200);
+                res.send("{"+
+                    '"allMatchesVisible":'+
+                    JSON.stringify(matches)+
+                    "}");
+            }
+        });
+    });
+
+    /**
      * Return the team id
      */
     app.get("/api/team/:teamName", function(req, res) {
