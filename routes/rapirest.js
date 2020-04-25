@@ -148,6 +148,8 @@ module.exports = function(app, swig, DBManager, io) {
         });
     });
 
+    //Record events
+
     /**
      * Add new event start
      */
@@ -1027,6 +1029,32 @@ module.exports = function(app, swig, DBManager, io) {
                         res.send(JSON.stringify(record));
                     }
                 });
+            }
+        });
+    });
+
+    //Follow matches
+
+    /**
+     * Return match events
+     */
+    app.get("/api/events/:id", function(req, res) {
+        var criterion = {
+            matchId : DBManager.mongo.ObjectID(req.params.id)
+        };
+
+        DBManager.getEvents(criterion, function (events) {
+            if (events == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                res.status(200);
+                res.send("{"+
+                    '"events":'+
+                    JSON.stringify(events)+
+                    "}");
             }
         });
     });
