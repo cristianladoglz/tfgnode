@@ -1059,4 +1059,29 @@ module.exports = function(app, swig, DBManager, io) {
         });
     });
 
+    /**
+     * Return match points of two teams
+     */
+    app.get("/api/points/:id", function(req, res) {
+        var criterion = {
+            matchId : DBManager.mongo.ObjectID(req.params.id),
+            $or : [ { eventType : "addPoints" } , { eventType : "subPoints" } ]
+        };
+
+        DBManager.getEvents(criterion, function (events) {
+            if (events == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                res.status(200);
+                res.send("{"+
+                    '"points":'+
+                    JSON.stringify(events)+
+                    "}");
+            }
+        });
+    });
+
 };
