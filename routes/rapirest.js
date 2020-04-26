@@ -1084,4 +1084,12 @@ module.exports = function(app, swig, DBManager, io) {
         });
     });
 
+    io.on('connection', (socket) => {
+        socket.on('event', function (string) {
+            let  message = {"toString" : string};
+
+            io.emit("event", message);
+        });
+    });
+
 };

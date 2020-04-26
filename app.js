@@ -61,7 +61,7 @@ require("./routes/rapirest.js")(app, swig, DBManager, io);
 
 require("./routes/test/fillDB.js")(app, swig, DBManager);
 
-app.listen(app.get('port'), function(){
+http.listen(app.get('port'), function(){
   console.log("Servidor activo en el puerto "+app.get('port'));
 });
 
