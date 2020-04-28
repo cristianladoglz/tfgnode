@@ -177,6 +177,24 @@ module.exports = {
         });
     },
 
+    deleteTeam : function(criterion, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('teams');
+                collection.remove(criterion, function (err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
     //Matches management
     getMatches : function(criterion,funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {

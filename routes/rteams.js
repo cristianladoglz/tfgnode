@@ -124,4 +124,43 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    app.get("/team/list", function(req, res) {
+        var criterion={};
+
+        DBManager.getTeams(criterion, function(teams) {
+            if (teams == null) {
+                res.send("Error al listar equipos");
+            } else {
+                var respuesta = showView('views/listTeams.html', {teams: teams}, req.session);
+                res.send(respuesta);
+            }
+        });
+    });
+
+    app.get('/team/delete/:id', function (req, res) {
+        var criterion = {"_id": DBManager.mongo.ObjectID(req.params.id)};
+        DBManager.getTeams(criterion, function(teams){
+            if(teams == null)
+                res.send("Error al obtener equipos para eliminar");
+            else{
+                var teamName = {$or : [ { localTeam : teams[0].teamName } , { visitorTeam : teams[0].teamName } ]};
+                DBManager.getMatches(teamName, function(matches){
+                    if(matches == null)
+                        res.send("Error al obtener partidos para eliminar equipo");
+                    else if(matches.length>0)
+                        res.redirect("/team/list?message=El equipo está en algún partido");
+                    else{
+                        DBManager.deleteTeam(criterion, function (teams) {
+                            if (teams == null) {
+                                res.send("Error al eliminar");
+                            } else {
+                                res.redirect("/team/list");
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
+
 };
