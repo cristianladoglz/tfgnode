@@ -1084,6 +1084,55 @@ module.exports = function(app, swig, DBManager, io) {
         });
     });
 
+    //Users management
+
+    /**
+     * Return a list with users
+     */
+    app.get("/api/users", function(req, res) {
+        var criterion = {
+        };
+
+        DBManager.getUsers(criterion, function (users) {
+            if (users == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                res.status(200);
+                res.send("{"+
+                    '"users":'+
+                    JSON.stringify(users)+
+                    "}");
+            }
+        });
+    });
+
+    /**
+     * Record user
+     */
+    app.post("/api/add/user", function(req, res) {
+        var lock = app.get("crypto").createHmac('sha256', app.get('clave'))
+            .update(req.body.password).digest('hex');
+        var user = {
+            userName: req.body.userName,
+            password: lock
+        };
+
+        DBManager.insertUser(user, function (id) {
+            if (id == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                });
+            } else {
+                res.status(201);
+                res.send(JSON.stringify(user));
+            }
+        });
+    });
+
     io.on('connection', (socket) => {
         socket.on('event', function (event, points, teamId) {
             let  message = {
