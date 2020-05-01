@@ -96,6 +96,7 @@ module.exports = function(app, swig, DBManager) {
             matchCourt : "Niemeyer",
             tableOfficial : "",
             userName : "test",
+            followers : [],
             state : "created"
         };
 
@@ -112,6 +113,7 @@ module.exports = function(app, swig, DBManager) {
             matchCourt : "Polideportivo Quirinal",
             tableOfficial : "",
             userName : "test",
+            followers : [],
             state : "active"
         };
 

@@ -63,6 +63,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
                     matchCourt : court,
                     tableOfficial : tableOfficial,
                     userName : req.session.user.userName,
+                    followers : [],
                     state : "created"
                 };
 
