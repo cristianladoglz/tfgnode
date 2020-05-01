@@ -1133,6 +1133,34 @@ module.exports = function(app, swig, DBManager, io) {
         });
     });
 
+    /**
+     * Return a user or no one if not exist
+     */
+    app.post("/api/user", function(req, res) {
+        var lock = app.get("crypto").createHmac('sha256', app.get('clave'))
+            .update(req.body.password).digest('hex');
+
+        var criterion = {
+            userName: req.body.userName,
+            password: lock
+        };
+
+        DBManager.getUsers(criterion, function (users) {
+            if (users == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                })
+            } else {
+                res.status(200);
+                res.send("{"+
+                    '"user":'+
+                    JSON.stringify(users)+
+                    "}");
+            }
+        });
+    });
+
     io.on('connection', (socket) => {
         socket.on('event', function (event, points, teamId) {
             let  message = {
