@@ -77,10 +77,10 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if user==null %}
                 <li><a href="/registro"><span class="glyphicon glyphicon-user"></span>Registrate</a></li>
-                <li><a href="/identificacion"><span class="glyphicon glyphicon-log-in"></span>Identifícate</a></li>
+                <li><a href="/inicioSesion"><span class="glyphicon glyphicon-log-in"></span> Identifícate</a></li>
                 {%endif%}
                 {% if user!=null %}
-                    <li><a href="/desconectarse"><span class="glyphicon glyphicon-log-out"></span>Cerrar sesión</a></li>
+                    <li><a href="/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesión</a></li>
                 {%endif%}
             </ul>
         </div>

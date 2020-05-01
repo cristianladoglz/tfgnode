@@ -10,9 +10,7 @@
         <div class="col-sm-10">
             <select id="local" name="local" class="col-12">
                 {% for team in teams %}
-                    {% if team.teamName != 'test' && team.teamName != 'test2' %}
-                        <option name="{{ team.teamName }} Local" value="{{ team.teamName }}" >{{ team.teamName }}</option>
-                    {% endif %}
+                    <option name="{{ team.teamName }} Local" value="{{ team.teamName }}" >{{ team.teamName }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -22,9 +20,7 @@
         <div class="col-sm-10">
             <select id="visitor" name="visitor" class="col-12">
                 {% for team in teams %}
-                    {% if team.teamName != 'test' && team.teamName != 'test2' %}
-                        <option name="{{ team.teamName }} Visitor" value="{{ team.teamName }}" >{{ team.teamName }}</option>
-                    {% endif %}
+                    <option name="{{ team.teamName }} Visitor" value="{{ team.teamName }}" >{{ team.teamName }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -82,11 +78,9 @@
         <label class="control-label col-sm-2" for="courtSelect">Lugar:</label>
         <div class="col-sm-10">
             <select id="courtSelect" name="courtSelect" class="col-12"
-                    onchange="if(this.value=='otro') {document.getElementById('court').disabled = false} else {document.getElementById('court').disabled = true} ">
+                    onchange="document.getElementById('court').disabled=this.value!=='otro'; ">
                 {% for team in teams %}
-                    {% if team.teamCourt != 'test' && team.teamCourt != 'test2' %}
-                        <option name="{{ team.teamCourt }}" value="{{ team.teamCourt }}" >{{ team.teamCourt }}</option>
-                    {% endif %}
+                    <option name="{{ team.teamCourt }}" value="{{ team.teamCourt }}" >{{ team.teamCourt }}</option>
                 {% endfor %}
                 <option value="otro" >Otro</option>
             </select>
@@ -103,6 +97,9 @@
         <div class="col-sm-10">
             <select id="tableOfficial" name="tableOfficial" class="col-12">
                 <option name="Sin asignar" value="none" >Sin asignar</option>
+                {% for user in users %}
+                    <option name="Sin asignar" value="{{ user.userName }}" >{{ user.userName }}</option>
+                {% endfor %}
             </select>
         </div>
     </div>

@@ -12,8 +12,14 @@ module.exports = function(app, swig, DBManager, validationManager) {
             if (teams == null) {
                 res.send("Error al obtener equipos");
             } else {
-                var respuesta = showView('views/addMatch.html', {teams: teams}, req.session);
-                res.send(respuesta);
+                DBManager.getUsers(criterion, function(users){
+                    if(users == null){
+                        res.send("Error al obtener usuarios");
+                    } else {
+                        var response = showView('views/addMatch.html', {teams: teams, users: users}, req.session);
+                        res.send(response);
+                    }
+                });
             }
         });
     });
@@ -56,6 +62,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
                     time : req.body.time,
                     matchCourt : court,
                     tableOfficial : tableOfficial,
+                    userName : req.session.user.userName,
                     state : "created"
                 };
 
@@ -71,7 +78,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
     });
 
     app.get("/match/mine", function(req, res) {
-        var criterion={};
+        var criterion={userName: req.session.user.userName};
 
         DBManager.getMatches(criterion, function(matches) {
             if (matches == null) {
@@ -85,7 +92,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
 
     app.get('/match/activate/:id', function (req, res) {
         var matchId = DBManager.mongo.ObjectID(req.params.id);
-        var user=req.session.usuario;
+        var user=req.session.user;
         var criterion={_id:matchId};
 
         DBManager.getMatches(criterion, function(matches){

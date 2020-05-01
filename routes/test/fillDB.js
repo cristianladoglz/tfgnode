@@ -5,6 +5,10 @@ module.exports = function(app, swig, DBManager) {
         });
 
         //Users
+        var user1 = {
+            userName: "test",
+            password: "1392542397501e1158418adae09d694ffb8ed833a3a5e8a017e15ba565d28c70"
+        };
 
         //Teams
         var team1 = {
@@ -91,6 +95,7 @@ module.exports = function(app, swig, DBManager) {
             time : "18:00",
             matchCourt : "Niemeyer",
             tableOfficial : "",
+            userName : "test",
             state : "created"
         };
 
@@ -106,35 +111,40 @@ module.exports = function(app, swig, DBManager) {
             time : "20:11",
             matchCourt : "Polideportivo Quirinal",
             tableOfficial : "",
+            userName : "test",
             state : "active"
         };
 
         //Events
 
+        //Records
 
-        DBManager.insertTeam(team1, function(){
-            DBManager.insertTeam(team2, function(){
-                DBManager.insertTeam(team3, function(){
-                    DBManager.insertTeam(team4, function(){
-                        DBManager.insertTeam(team5, function(){
-                            DBManager.insertTeam(team6, function(){
-                                DBManager.insertTeam(team7, function(){
-                                    DBManager.insertCoach(coach1, function(){
-                                        DBManager.insertCoach(coach2, function(){
-                                            DBManager.insertPlayer(player1, function(){
-                                                DBManager.insertPlayer(player2, function(){
-                                                    DBManager.insertPlayer(player3, function(){
-                                                        DBManager.insertPlayer(player4, function(){
-                                                            DBManager.insertMatch(match1, function(){
-                                                                DBManager.insertMatch(match2, function(){
-                                                                    res.send({
-                                                                        users: "usuarios insertados",
-                                                                        teams: "equipos insertados",
-                                                                        coaches: "entrenadores insertados",
-                                                                        players: "jugadores insertados",
-                                                                        matches: "partidos insertados",
-                                                                        events: "eventos insertados",
-                                                                        records: "historial insertado"
+        DBManager.insertUser(user1, function()
+        {
+            DBManager.insertTeam(team1, function () {
+                DBManager.insertTeam(team2, function () {
+                    DBManager.insertTeam(team3, function () {
+                        DBManager.insertTeam(team4, function () {
+                            DBManager.insertTeam(team5, function () {
+                                DBManager.insertTeam(team6, function () {
+                                    DBManager.insertTeam(team7, function () {
+                                        DBManager.insertCoach(coach1, function () {
+                                            DBManager.insertCoach(coach2, function () {
+                                                DBManager.insertPlayer(player1, function () {
+                                                    DBManager.insertPlayer(player2, function () {
+                                                        DBManager.insertPlayer(player3, function () {
+                                                            DBManager.insertPlayer(player4, function () {
+                                                                DBManager.insertMatch(match1, function () {
+                                                                    DBManager.insertMatch(match2, function () {
+                                                                        res.send({
+                                                                            users: "usuarios insertados",
+                                                                            teams: "equipos insertados",
+                                                                            coaches: "entrenadores insertados",
+                                                                            players: "jugadores insertados",
+                                                                            matches: "partidos insertados",
+                                                                            events: "eventos insertados",
+                                                                            records: "historial insertado"
+                                                                        });
                                                                     });
                                                                 });
                                                             });

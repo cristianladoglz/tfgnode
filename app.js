@@ -25,6 +25,20 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// router user session
+var routerUserSession = express.Router();
+routerUserSession.use(function(req, res, next) {
+  if ( req.session.user ) {
+      next();
+  } else {
+      res.redirect("/inicioSesion");
+  }
+});
+app.use("/match/*", routerUserSession);
+app.use("/team/*", routerUserSession);
+app.use("/coach/*", routerUserSession);
+app.use("/player/*", routerUserSession);
+
 //Database
 var DBManager = require("./modules/DBManager.js");
 DBManager.init(app,mongo);
@@ -53,7 +67,7 @@ app.use( function (err, req, res, next ) {
   }
 });
 
-require("./routes/rhome.js")(app, swig);
+require("./routes/rhome.js")(app, swig, DBManager);
 require("./routes/rusers.js")(app, swig, DBManager, userValidationManager);
 require("./routes/rteams.js")(app, swig, DBManager, teamValidationManager);
 require("./routes/rmatches.js")(app, swig, DBManager, matchValidationManager);

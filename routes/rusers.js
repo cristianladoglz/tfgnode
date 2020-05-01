@@ -42,4 +42,34 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    app.get("/inicioSesion", function(req, res) {
+        var response = showView('views/signIn.html', {}, req.session);
+        res.send(response);
+    });
+
+    app.post("/signIn", function(req, res) {
+        var lock = app.get("crypto").createHmac('sha256', app.get('clave'))
+            .update(req.body.password).digest('hex');
+        var criterion = {
+            userName : req.body.userName,
+            password : lock
+        };
+        DBManager.getUsers(criterion, function(users) {
+            if (users == null || users.length === 0) {
+                req.session.user = null;
+                res.redirect("/inicioSesion" +
+                    "?message=Usuario o password incorrecto"+
+                    "&messageType=alert-danger");
+            } else {
+                req.session.user = users[0];
+                res.redirect("/");
+            }
+        });
+    });
+
+    app.get('/cerrarSesion', function (req, res) {
+        req.session.user = null;
+        res.redirect("/inicioSesion");
+    });
+
 };
