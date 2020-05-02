@@ -238,7 +238,7 @@ module.exports = {
                 funcionCallback(null);
             } else {
                 var collection = db.collection('matches');
-                collection.update(criterion, {$set: match}, function(err, result) {
+                collection.update(criterion, match, function(err, result) {
                     if (err) {
                         funcionCallback(null);
                     } else {

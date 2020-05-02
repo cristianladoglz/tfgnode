@@ -130,7 +130,7 @@ module.exports = function(app, swig, DBManager, io) {
 
         DBManager.getMatches(criterion, function(matches){
             if(matches[0]!==null){
-                var state={ state : "playing" };
+                var state={ $set : { state : "playing" } };
                 DBManager.modifyMatch(criterion, state,function(result){
                     if (result == null) {
                         res.status(500);
@@ -1157,6 +1157,62 @@ module.exports = function(app, swig, DBManager, io) {
                     '"user":'+
                     JSON.stringify(users)+
                     "}");
+            }
+        });
+    });
+
+    /**
+     * Add follower to a match
+     */
+    app.put("/api/add/follower/:id", function(req, res) {
+        var criterion = {
+            _id : DBManager.mongo.ObjectID(req.params.id)
+        };
+
+        DBManager.getMatches(criterion, function(matches){
+            if(matches[0]!==null){
+                var followers={ $push : { followers : req.body.userName } };
+                DBManager.modifyMatch(criterion, followers,function(result){
+                    if (result == null) {
+                        res.status(500);
+                        res.json({
+                            error : "Se ha producido un error"
+                        })
+                    } else {
+                        res.status(200);
+                        res.json({
+                            mensaje : "Seguidor añadido"
+                        })
+                    }
+                });
+            }
+        });
+    });
+
+    /**
+     * Remove a follower from a match
+     */
+    app.put("/api/remove/follower/:id", function(req, res) {
+        var criterion = {
+            _id : DBManager.mongo.ObjectID(req.params.id)
+        };
+
+        DBManager.getMatches(criterion, function(matches){
+            if(matches[0]!==null){
+                var followers={ $pull : { followers : req.body.userName } };
+                DBManager.modifyMatch(criterion, followers,function(result){
+                    if (result == null) {
+                        res.status(500);
+                        res.json({
+                            error : "Se ha producido un error"
+                        })
+                    } else {
+                        res.status(200);
+                        res.json({
+                            mensaje : "Seguidor eliminado"
+                        })
+                    }
+                });
             }
         });
     });

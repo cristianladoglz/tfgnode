@@ -121,8 +121,7 @@ module.exports = function(app, swig, DBManager) {
 
         //Records
 
-        DBManager.insertUser(user1, function()
-        {
+        DBManager.insertUser(user1, function() {
             DBManager.insertTeam(team1, function () {
                 DBManager.insertTeam(team2, function () {
                     DBManager.insertTeam(team3, function () {
