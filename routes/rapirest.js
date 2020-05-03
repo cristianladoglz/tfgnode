@@ -924,10 +924,10 @@ module.exports = function(app, swig, DBManager, io) {
 
         DBManager.getMatches(criterion, function(matches){
             if(matches[0]!==null){
-                var state={
+                var state={ $set : {
                     state : "finished",
                     localPoints : req.body.localPoints,
-                    visitorPoints : req.body.visitorPoints
+                    visitorPoints : req.body.visitorPoints }
                 };
                 DBManager.modifyMatch(criterion, state,function(result){
                     if (result == null) {
@@ -1211,6 +1211,40 @@ module.exports = function(app, swig, DBManager, io) {
                         res.json({
                             mensaje : "Seguidor eliminado"
                         })
+                    }
+                });
+            }
+        });
+    });
+
+    /**
+     * Return a list with a match players summary
+     */
+    app.get("/api/records/:id", function(req, res) {
+        var criterion = {
+            _id : DBManager.mongo.ObjectID(req.params.id)
+        };
+
+        DBManager.getMatches(criterion, function (matches) {
+            if (matches == null) {
+                res.status(500);
+                res.json({
+                    error: "Se ha producido un error"
+                });
+            } else {
+                var criterionRecord = { matchId : DBManager.mongo.ObjectID(req.params.id) }
+                DBManager.getRecords(criterionRecord, function(records){
+                    if(records == null){
+                        res.status(500);
+                        res.json({
+                            error: "Se ha producido un error"
+                        });
+                    } else {
+                        res.status(200);
+                        res.send("{"+
+                            '"records":'+
+                            JSON.stringify(records)+
+                            "}");
                     }
                 });
             }

@@ -305,4 +305,22 @@ module.exports = {
         });
     },
 
+    getRecords : function(criterion,funcionCallback){
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('records');
+                collection.find(criterion).toArray(function(err, events) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(events);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+
 };
