@@ -50,18 +50,18 @@ module.exports = function(app, swig, DBManager, validationManager) {
     app.post("/signIn", function(req, res) {
         var lock = app.get("crypto").createHmac('sha256', app.get('clave'))
             .update(req.body.password).digest('hex');
-        var criterion = {
+        var validateUser = {
             userName : req.body.userName,
             password : lock
         };
-        DBManager.getUsers(criterion, function(users) {
-            if (users == null || users.length === 0) {
+        validationManager.login(validateUser, function(message, user) {
+            if (message !== null) {
                 req.session.user = null;
                 res.redirect("/inicioSesion" +
-                    "?message=Usuario o password incorrecto"+
+                    "?message=" + message +
                     "&messageType=alert-danger");
             } else {
-                req.session.user = users[0];
+                req.session.user = user;
                 res.redirect("/");
             }
         });
