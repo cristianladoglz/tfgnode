@@ -185,14 +185,14 @@ describe('Match creation', function() {
                                                                                     matchValidationManager.matchCreation(correctMatch, function (msg) {
                                                                                         assert.equal(msg, "La opción de tiempo corrido no está bien seleccionada");
 
-                                                                                        describe('Negative timeouts', function () {
+                                                                                        describe('Running time true', function(){
                                                                                             var correctMatch = {
                                                                                                 localTeam: "test",
                                                                                                 visitorTeam: "test2",
                                                                                                 quartersNumber: 4,
                                                                                                 durationQuarter: 60,
                                                                                                 runningTime: "true",
-                                                                                                timeout: -1,
+                                                                                                timeout: 0,
                                                                                                 maxPersonalFouls: 0,
                                                                                                 date: "2020-01-01",
                                                                                                 time: "00:00",
@@ -200,17 +200,17 @@ describe('Match creation', function() {
                                                                                                 tableOfficial: "",
                                                                                                 state: "created"
                                                                                             };
-                                                                                            matchValidationManager.matchCreation(correctMatch, function (msg) {
-                                                                                                assert.equal(msg, "El número de tiempos muertos no puede ser negativo");
+                                                                                            matchValidationManager.matchCreation(correctMatch, function(msg){
+                                                                                                assert.equal(msg, null);
 
-                                                                                                describe('Timeouts empty', function () {
+                                                                                                describe('Running time false', function(){
                                                                                                     var correctMatch = {
                                                                                                         localTeam: "test",
                                                                                                         visitorTeam: "test2",
                                                                                                         quartersNumber: 4,
                                                                                                         durationQuarter: 60,
-                                                                                                        runningTime: "true",
-                                                                                                        timeout: "",
+                                                                                                        runningTime: "false",
+                                                                                                        timeout: 0,
                                                                                                         maxPersonalFouls: 0,
                                                                                                         date: "2020-01-01",
                                                                                                         time: "00:00",
@@ -218,18 +218,18 @@ describe('Match creation', function() {
                                                                                                         tableOfficial: "",
                                                                                                         state: "created"
                                                                                                     };
-                                                                                                    matchValidationManager.matchCreation(correctMatch, function (msg) {
-                                                                                                        assert.equal(msg, "Número de tiempos muertos vacío");
+                                                                                                    matchValidationManager.matchCreation(correctMatch, function(msg){
+                                                                                                        assert.equal(msg, null);
 
-                                                                                                        describe('Negative max personal fouls', function () {
+                                                                                                        describe('Negative timeouts', function () {
                                                                                                             var correctMatch = {
                                                                                                                 localTeam: "test",
                                                                                                                 visitorTeam: "test2",
                                                                                                                 quartersNumber: 4,
                                                                                                                 durationQuarter: 60,
                                                                                                                 runningTime: "true",
-                                                                                                                timeout: 1,
-                                                                                                                maxPersonalFouls: -1,
+                                                                                                                timeout: -1,
+                                                                                                                maxPersonalFouls: 0,
                                                                                                                 date: "2020-01-01",
                                                                                                                 time: "00:00",
                                                                                                                 matchCourt: "test",
@@ -237,17 +237,17 @@ describe('Match creation', function() {
                                                                                                                 state: "created"
                                                                                                             };
                                                                                                             matchValidationManager.matchCreation(correctMatch, function (msg) {
-                                                                                                                assert.equal(msg, "El número de máximo de faltas personales no puede ser negativo");
+                                                                                                                assert.equal(msg, "El número de tiempos muertos no puede ser negativo");
 
-                                                                                                                describe('Max personal fouls empty', function () {
+                                                                                                                describe('Timeouts empty', function () {
                                                                                                                     var correctMatch = {
                                                                                                                         localTeam: "test",
                                                                                                                         visitorTeam: "test2",
                                                                                                                         quartersNumber: 4,
                                                                                                                         durationQuarter: 60,
                                                                                                                         runningTime: "true",
-                                                                                                                        timeout: 1,
-                                                                                                                        maxPersonalFouls: "",
+                                                                                                                        timeout: "",
+                                                                                                                        maxPersonalFouls: 0,
                                                                                                                         date: "2020-01-01",
                                                                                                                         time: "00:00",
                                                                                                                         matchCourt: "test",
@@ -255,9 +255,9 @@ describe('Match creation', function() {
                                                                                                                         state: "created"
                                                                                                                     };
                                                                                                                     matchValidationManager.matchCreation(correctMatch, function (msg) {
-                                                                                                                        assert.equal(msg, "Máximo de faltas personales vacío");
+                                                                                                                        assert.equal(msg, "Número de tiempos muertos vacío");
 
-                                                                                                                        describe('Nonexistent court', function () {
+                                                                                                                        describe('Negative max personal fouls', function () {
                                                                                                                             var correctMatch = {
                                                                                                                                 localTeam: "test",
                                                                                                                                 visitorTeam: "test2",
@@ -265,17 +265,17 @@ describe('Match creation', function() {
                                                                                                                                 durationQuarter: 60,
                                                                                                                                 runningTime: "true",
                                                                                                                                 timeout: 1,
-                                                                                                                                maxPersonalFouls: 1,
+                                                                                                                                maxPersonalFouls: -1,
                                                                                                                                 date: "2020-01-01",
                                                                                                                                 time: "00:00",
-                                                                                                                                matchCourt: "",
+                                                                                                                                matchCourt: "test",
                                                                                                                                 tableOfficial: "",
                                                                                                                                 state: "created"
                                                                                                                             };
                                                                                                                             matchValidationManager.matchCreation(correctMatch, function (msg) {
-                                                                                                                                assert.equal(msg, "El nombre del lugar no existe");
+                                                                                                                                assert.equal(msg, "El número de máximo de faltas personales no puede ser negativo");
 
-                                                                                                                                describe('Date empty', function () {
+                                                                                                                                describe('Max personal fouls empty', function () {
                                                                                                                                     var correctMatch = {
                                                                                                                                         localTeam: "test",
                                                                                                                                         visitorTeam: "test2",
@@ -283,17 +283,17 @@ describe('Match creation', function() {
                                                                                                                                         durationQuarter: 60,
                                                                                                                                         runningTime: "true",
                                                                                                                                         timeout: 1,
-                                                                                                                                        maxPersonalFouls: 1,
-                                                                                                                                        date: "",
+                                                                                                                                        maxPersonalFouls: "",
+                                                                                                                                        date: "2020-01-01",
                                                                                                                                         time: "00:00",
                                                                                                                                         matchCourt: "test",
                                                                                                                                         tableOfficial: "",
                                                                                                                                         state: "created"
                                                                                                                                     };
                                                                                                                                     matchValidationManager.matchCreation(correctMatch, function (msg) {
-                                                                                                                                        assert.equal(msg, "La fecha está vacía");
+                                                                                                                                        assert.equal(msg, "Máximo de faltas personales vacío");
 
-                                                                                                                                        describe('Time empty', function () {
+                                                                                                                                        describe('Nonexistent court', function () {
                                                                                                                                             var correctMatch = {
                                                                                                                                                 localTeam: "test",
                                                                                                                                                 visitorTeam: "test2",
@@ -303,15 +303,55 @@ describe('Match creation', function() {
                                                                                                                                                 timeout: 1,
                                                                                                                                                 maxPersonalFouls: 1,
                                                                                                                                                 date: "2020-01-01",
-                                                                                                                                                time: "",
-                                                                                                                                                matchCourt: "test",
+                                                                                                                                                time: "00:00",
+                                                                                                                                                matchCourt: "",
                                                                                                                                                 tableOfficial: "",
                                                                                                                                                 state: "created"
                                                                                                                                             };
                                                                                                                                             matchValidationManager.matchCreation(correctMatch, function (msg) {
-                                                                                                                                                assert.equal(msg, "La hora está vacía");
+                                                                                                                                                assert.equal(msg, "El nombre del lugar no existe");
 
-                                                                                                                                                console.log("FINISH MATCH VALIDATION TEST");
+                                                                                                                                                describe('Date empty', function () {
+                                                                                                                                                    var correctMatch = {
+                                                                                                                                                        localTeam: "test",
+                                                                                                                                                        visitorTeam: "test2",
+                                                                                                                                                        quartersNumber: 4,
+                                                                                                                                                        durationQuarter: 60,
+                                                                                                                                                        runningTime: "true",
+                                                                                                                                                        timeout: 1,
+                                                                                                                                                        maxPersonalFouls: 1,
+                                                                                                                                                        date: "",
+                                                                                                                                                        time: "00:00",
+                                                                                                                                                        matchCourt: "test",
+                                                                                                                                                        tableOfficial: "",
+                                                                                                                                                        state: "created"
+                                                                                                                                                    };
+                                                                                                                                                    matchValidationManager.matchCreation(correctMatch, function (msg) {
+                                                                                                                                                        assert.equal(msg, "La fecha está vacía");
+
+                                                                                                                                                        describe('Time empty', function () {
+                                                                                                                                                            var correctMatch = {
+                                                                                                                                                                localTeam: "test",
+                                                                                                                                                                visitorTeam: "test2",
+                                                                                                                                                                quartersNumber: 4,
+                                                                                                                                                                durationQuarter: 60,
+                                                                                                                                                                runningTime: "true",
+                                                                                                                                                                timeout: 1,
+                                                                                                                                                                maxPersonalFouls: 1,
+                                                                                                                                                                date: "2020-01-01",
+                                                                                                                                                                time: "",
+                                                                                                                                                                matchCourt: "test",
+                                                                                                                                                                tableOfficial: "",
+                                                                                                                                                                state: "created"
+                                                                                                                                                            };
+                                                                                                                                                            matchValidationManager.matchCreation(correctMatch, function (msg) {
+                                                                                                                                                                assert.equal(msg, "La hora está vacía");
+
+                                                                                                                                                                console.log("FINISH MATCH VALIDATION TEST");
+                                                                                                                                                            });
+                                                                                                                                                        });
+                                                                                                                                                    });
+                                                                                                                                                });
                                                                                                                                             });
                                                                                                                                         });
                                                                                                                                     });

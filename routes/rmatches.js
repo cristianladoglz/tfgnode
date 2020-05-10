@@ -93,15 +93,12 @@ module.exports = function(app, swig, DBManager, validationManager) {
 
     app.get('/match/activate/:id', function (req, res) {
         var matchId = DBManager.mongo.ObjectID(req.params.id);
-        var user=req.session.user;
-        var criterion={_id:matchId};
+        var user = req.session.user;
+        var criterion={ _id: matchId };
 
         DBManager.getMatches(criterion, function(matches){
-            var matchCriterion = {"_id": matchId};
-            var match = {
-                state: "active"
-            };
-            DBManager.modifyMatch(matchCriterion, match, function (result) {
+            var matchCriterion = { _id: matchId };
+            DBManager.modifyMatch(matchCriterion, { $set : { state : "active" } }, function (result) {
                 if (result == null) {
                     res.send("Error al actualizar el partido como activo");
                 } else {
@@ -113,8 +110,8 @@ module.exports = function(app, swig, DBManager, validationManager) {
 
     app.get('/match/modify/:id', function (req, res) {
         var matchId = DBManager.mongo.ObjectID(req.params.id);
-        var user=req.session.usuario;
-        var criterion={_id:matchId};
+        var user = req.session.usuario;
+        var criterion = { _id : matchId };
 
         DBManager.getMatches(criterion, function(matches){
             if(matches.length === 0)
@@ -126,8 +123,14 @@ module.exports = function(app, swig, DBManager, validationManager) {
                 if (teams == null) {
                     res.send("Error al obtener equipos");
                 } else {
-                    var respuesta = showView('views/modifyMatch.html', {match: matches[0], teams: teams}, req.session);
-                    res.send(respuesta);
+                    DBManager.getUsers(criterion, function(users){
+                        if(users == null){
+                            res.send("Error al obtener usuarios");
+                        } else {
+                            var respuesta = showView('views/modifyMatch.html', {match: matches[0], teams: teams, users: users}, req.session);
+                            res.send(respuesta);
+                        }
+                    });
                 }
             });
         });
@@ -170,7 +173,10 @@ module.exports = function(app, swig, DBManager, validationManager) {
                     date : req.body.date,
                     time : req.body.time,
                     matchCourt : court,
-                    tableOfficial : tableOfficial
+                    userName : req.session.user.userName,
+                    followers : [],
+                    tableOfficial : tableOfficial,
+                    state : "created"
                 };
 
                 var matchId = DBManager.mongo.ObjectID(req.params.id);

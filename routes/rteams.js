@@ -138,7 +138,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
     });
 
     app.get('/team/delete/:id', function (req, res) {
-        var criterion = {"_id": DBManager.mongo.ObjectID(req.params.id)};
+        var criterion = {_id: DBManager.mongo.ObjectID(req.params.id)};
         DBManager.getTeams(criterion, function(teams){
             if(teams == null)
                 res.send("Error al obtener equipos para eliminar");

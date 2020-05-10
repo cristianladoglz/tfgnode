@@ -25,9 +25,9 @@
             <select id="visitor" name="visitor" class="col-12">
                 {% for team in teams %}
                     {% if team.teamName != match.visitorTeam %}
-                        <option name="{{ team.teamName }} Local" value="{{ team.teamName }}" >{{ team.teamName }}</option>
+                        <option name="{{ team.teamName }} Visitor" value="{{ team.teamName }}" >{{ team.teamName }}</option>
                     {% else %}
-                        <option name="{{ team.teamName }} Local" value="{{ team.teamName }}" selected>{{ team.teamName }}</option>
+                        <option name="{{ team.teamName }} Visitor" value="{{ team.teamName }}" selected>{{ team.teamName }}</option>
                     {% endif %}
                 {% endfor %}
             </select>
@@ -113,7 +113,14 @@
         <label class="control-label col-sm-2" for="tableOfficial">Oficial de mesa:</label>
         <div class="col-sm-10">
             <select id="tableOfficial" name="tableOfficial" class="col-12">
-                <option name="Sin asignar" value="none" >Sin asignar</option>
+                <option name="Sin asignar" value="none" selected>Sin asignar</option>
+                {% for user in users %}
+                    {% if user.userName != match.tableOfficial %}
+                        <option name="{{ user.userName }}" value="{{ user.userName }}" >{{ user.userName }}</option>
+                    {% else %}
+                        <option name="{{ user.userName }}" value="{{ user.userName }}" selected>{{ user.userName }}</option>
+                    {% endif %}
+                {% endfor %}
             </select>
         </div>
     </div>

@@ -28,13 +28,13 @@
                 <p>Activo</p>
                 {% endif %}
                 {% if match.state==="created" %}
-                <a class="btn btn-primary pull-right"
+                <a id="activate" class="btn btn-primary pull-right"
                    href="/match/activate/{{match._id.toString()}}">Activar</a>
                 {% endif %}
             </td>
             <td>
                 {% if match.state === "created" %}
-                <a class="btn btn-primary pull-right"
+                <a id="modify" class="btn btn-primary pull-right"
                    href="/match/modify/{{match._id.toString()}}">Modificar</a>
                 {% endif %}
             </td>
