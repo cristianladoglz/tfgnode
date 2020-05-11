@@ -12,7 +12,7 @@ module.exports = {
     userRegister : function(user, funcionCallback) {
         this.DBManager.getUsers({userName:user.userName}, function(users) {
             if (users.length > 0)
-                this.message="El nombre de usuario ya existe";
+                this.message = "El nombre de usuario ya existe";
             if (user.userName === "")
                 this.message="Campo nombre de usuario vacío";
             if(user.password==="")

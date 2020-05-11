@@ -35,6 +35,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
                     if (id == null) {
                         res.redirect("/registro?message=Error al registrar usuario");
                     } else {
+                        req.session.user = user;
                         res.redirect("/");
                     }
                 });
