@@ -29,7 +29,7 @@ describe('Team creation', function() {
                                     userValidationManager.userRegister(emptyPassword, function(msg){
                                         assert.equal(msg, "Campo contraseña vacío");
 
-                                        describe('Correct coach addition', function() {
+                                        describe('Password confirm different', function() {
                                             var passwordConfirmDifferent = { userName: "test2", password: "1234", passwordConfirm: "1235" };
                                             userValidationManager.userRegister(passwordConfirmDifferent, function(msg){
                                                 assert.equal(msg, "Las contraseñas no coinciden");
