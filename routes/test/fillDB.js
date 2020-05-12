@@ -117,6 +117,23 @@ module.exports = function(app, swig, DBManager) {
             state : "active"
         };
 
+        var match3 = {
+            localTeam : "Llaranes",
+            visitorTeam : "Real Madrid",
+            quartersNumber : 4,
+            durationQuarter : 1,
+            runningTime : false,
+            timeOuts : 2,
+            maxPersonalFouls : 5,
+            date : "2020-04-10",
+            time : "12:30",
+            matchCourt : "La Toba",
+            tableOfficial : "test",
+            userName : "test",
+            followers : [],
+            state : "finished"
+        };
+
         //Events
 
         //Records
@@ -137,14 +154,16 @@ module.exports = function(app, swig, DBManager) {
                                                             DBManager.insertPlayer(player4, function () {
                                                                 DBManager.insertMatch(match1, function () {
                                                                     DBManager.insertMatch(match2, function () {
-                                                                        res.send({
-                                                                            users: "usuarios insertados",
-                                                                            teams: "equipos insertados",
-                                                                            coaches: "entrenadores insertados",
-                                                                            players: "jugadores insertados",
-                                                                            matches: "partidos insertados",
-                                                                            events: "eventos insertados",
-                                                                            records: "historial insertado"
+                                                                        DBManager.insertMatch(match3, function() {
+                                                                            res.send({
+                                                                                users: "usuarios insertados",
+                                                                                teams: "equipos insertados",
+                                                                                coaches: "entrenadores insertados",
+                                                                                players: "jugadores insertados",
+                                                                                matches: "partidos insertados",
+                                                                                events: "eventos insertados",
+                                                                                records: "historial insertado"
+                                                                            });
                                                                         });
                                                                     });
                                                                 });
