@@ -154,8 +154,8 @@ module.exports = function(app, swig, DBManager, io) {
      * Add new event start
      */
     app.post("/api/add/start", function(req, res) {
-        DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+        DBManager.getMatches({ _id : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -172,7 +172,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -185,8 +185,8 @@ module.exports = function(app, swig, DBManager, io) {
      * Add new event stop
      */
     app.post("/api/add/stop", function(req, res) {
-        DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+        DBManager.getMatches({ _id : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -204,7 +204,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -218,7 +218,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/resume", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null  || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -236,7 +236,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -250,7 +250,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/points", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null  || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -277,7 +277,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -291,7 +291,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/sub/points", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null  || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -318,7 +318,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -332,7 +332,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/personalFoul", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -358,7 +358,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -372,7 +372,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/sub/personalFoul", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -398,7 +398,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -412,7 +412,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/timeout", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -431,7 +431,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -445,7 +445,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/overAndBack", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -464,7 +464,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -478,7 +478,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/shotClock", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -497,7 +497,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -511,7 +511,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/eightSeconds", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -530,7 +530,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -544,7 +544,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/travelling", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -570,7 +570,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -584,7 +584,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/double", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -610,7 +610,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -624,7 +624,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/foot", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -650,7 +650,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -664,7 +664,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/fiveSeconds", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -690,7 +690,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -704,7 +704,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/threeSeconds", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -730,7 +730,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -744,7 +744,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/unsportmanlike", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -770,7 +770,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -784,7 +784,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/technicalFoul", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -810,7 +810,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -824,7 +824,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/finishQuarter", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -842,7 +842,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -856,7 +856,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/startQuarter", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -874,7 +874,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -888,7 +888,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/finish", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -905,7 +905,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -951,7 +951,7 @@ module.exports = function(app, swig, DBManager, io) {
      */
     app.post("/api/add/substitution", function(req, res) {
         DBManager.getMatches({ "_id" : DBManager.mongo.ObjectID(req.body.matchId)},function(matches) {
-            if (matches == null) {
+            if (matches == null || matches.length === 0) {
                 res.status(500);
                 res.json({
                     error: "Se ha producido un error"
@@ -984,7 +984,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error: "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(newEvent));
                     }
 
@@ -1025,7 +1025,7 @@ module.exports = function(app, swig, DBManager, io) {
                             error : "Se ha producido un error"
                         })
                     } else {
-                        res.status(201);
+                        res.status(200);
                         res.send(JSON.stringify(record));
                     }
                 });
@@ -1127,7 +1127,7 @@ module.exports = function(app, swig, DBManager, io) {
                     error: "Se ha producido un error"
                 });
             } else {
-                res.status(201);
+                res.status(200);
                 res.send(JSON.stringify(user));
             }
         });
