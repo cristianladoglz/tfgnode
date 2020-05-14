@@ -924,7 +924,7 @@ describe('followers', ()=> {
             .get('/api/allMatchesVisible')
             .end(function (err, res) {
                 expect(res).to.have.status(200);
-                expect(res.text).to.contains('"localTeam":"Sanfer","visitorTeam":"ADBA","quartersNumber":4,"durationQuarter":1,"runningTime":false,"timeOuts":2,"maxPersonalFouls":5,"date":"2020-04-10","time":"20:11","matchCourt":"Polideportivo Quirinal","tableOfficial":"","userName":"test","followers":[test2],"state":"finished"');
+                expect(res.text).to.contains('"localTeam":"Sanfer","visitorTeam":"ADBA","quartersNumber":4,"durationQuarter":1,"runningTime":false,"timeOuts":2,"maxPersonalFouls":5,"date":"2020-04-10","time":"20:11","matchCourt":"Polideportivo Quirinal","tableOfficial":"","userName":"test","followers":["test2"],"state":"finished"');
                 done();
             });
     });
