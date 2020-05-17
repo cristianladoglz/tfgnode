@@ -47,6 +47,8 @@ module.exports = {
                     msg = "El equipo no existe";
                 else if (player.playerName == "")
                     msg = "Campo nombre de jugador vacio";
+                else if (player.playerBib == "")
+                    msg = "Campo dorsal vacio";
                 else if (player.playerBib < 0)
                     msg = "Dorsal negativo";
                 else if (player.playerBib > 99)

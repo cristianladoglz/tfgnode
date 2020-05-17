@@ -99,7 +99,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
         var validatePlayer = {
             playerName : req.body.player,
             teamName : req.body.teamName,
-            playerBib : parseInt(req.body.bib)
+            playerBib : req.body.bib
         };
 
         validationManager.playerAddition(validatePlayer,function(message){
