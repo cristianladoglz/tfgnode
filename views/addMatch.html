@@ -98,7 +98,7 @@
             <select id="tableOfficial" name="tableOfficial" class="col-12">
                 <option name="Sin asignar" value="none" >Sin asignar</option>
                 {% for user in users %}
-                    <option name="Sin asignar" value="{{ user.userName }}" >{{ user.userName }}</option>
+                    <option name="{{ user.userName }}" value="{{ user.userName }}" >{{ user.userName }}</option>
                 {% endfor %}
             </select>
         </div>

@@ -55,8 +55,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
 
     app.post("/coach", function(req, res) {
         var validateCoach = {
+            coachName : req.body.coach,
             teamName : req.body.teamName
-        }
+        };
 
         validationManager.coachAddition(validateCoach,function(message){
             if(message!=null) {
@@ -96,6 +97,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
 
     app.post("/player", function(req, res) {
         var validatePlayer = {
+            playerName : req.body.player,
             teamName : req.body.teamName,
             playerBib : parseInt(req.body.bib)
         };

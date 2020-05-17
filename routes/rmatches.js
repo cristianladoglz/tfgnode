@@ -28,8 +28,15 @@ module.exports = function(app, swig, DBManager, validationManager) {
         var validateMatch = {
             localTeam : req.body.local.valueOf(),
             visitorTeam : req.body.visitor.valueOf(),
+            quartersNumber : req.body.quarter,
+            durationQuarter : req.body.duration,
             matchCourt : req.body.courtSelect.valueOf(),
-            runningTime : req.body.runningTime.valueOf()
+            runningTime : req.body.runningTime.valueOf(),
+            timeout : req.body.timeOut,
+            maxPersonalFouls : req.body.personalFoul,
+            date : req.body.date,
+            time : req.body.time,
+            tableOfficial : req.body.tableOfficial.valueOf()
         };
 
         validationManager.matchCreation(validateMatch,function(message){
@@ -138,15 +145,23 @@ module.exports = function(app, swig, DBManager, validationManager) {
 
     app.post("/match/:id", function(req, res) {
         var validateMatch = {
+            _id : req.params.id,
             localTeam : req.body.local.valueOf(),
             visitorTeam : req.body.visitor.valueOf(),
+            quartersNumber : req.body.quarter,
+            durationQuarter : req.body.duration,
             matchCourt : req.body.courtSelect.valueOf(),
-            runningTime : req.body.runningTime.valueOf()
+            runningTime : req.body.runningTime.valueOf(),
+            timeout : req.body.timeOut,
+            maxPersonalFouls : req.body.personalFoul,
+            date : req.body.date,
+            time : req.body.time,
+            tableOfficial : req.body.tableOfficial.valueOf()
         };
 
         validationManager.matchCreation(validateMatch,function(message){
             if(message!=null) {
-                res.redirect("/match/add" +
+                res.redirect("/match/modify/" + req.params.id +
                     "?message=" + message +
                     "&messageType=alert-danger");
             }else {

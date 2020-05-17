@@ -56,7 +56,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
             password : lock
         };
         validationManager.login(validateUser, function(message, user) {
-            if (message !== null) {
+            if (message != null) {
                 req.session.user = null;
                 res.redirect("/inicioSesion" +
                     "?message=" + message +

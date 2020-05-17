@@ -48,7 +48,11 @@ module.exports = {
                 dbManager.getTeams({teamCourt: match.matchCourt}, function (teams){
                     if (match.matchCourt!=="otro" && teams.length === 0)
                         msg = "El nombre del lugar no existe";
-                    funcionCallback(msg);
+                    dbManager.getUsers({userName: match.tableOfficial}, function(users){
+                        if(match.tableOfficial !== "none" && users.length === 0)
+                            msg = "El nombre del oficial de mesa no existe";
+                        funcionCallback(msg);
+                    });
                 });
             });
         });

@@ -24,9 +24,9 @@ module.exports = {
 
     coachAddition : function(coach,funcionCallback) {
         this.DBManager.getTeams({teamName : coach.teamName}, function(teams) {
-            if (teams.length == 0)
+            if (teams.length === 0)
                 this.message = "El equipo no existe";
-            else if (coach.coachName == "")
+            else if (coach.coachName === "")
                 this.message = "Campo nombre de entrenador vacio";
             else
                 this.message = null;
