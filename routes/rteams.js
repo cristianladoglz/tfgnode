@@ -6,7 +6,7 @@ module.exports = function(app, swig, DBManager, validationManager) {
     }
 
     app.get("/team/add", function(req,res) {
-        var respuesta = swig.renderFile('views/addTeam.html', { user: req.session.usuario });
+        var respuesta = swig.renderFile('views/addTeam.html', { user: req.session.user });
         res.send(respuesta);
     });
 

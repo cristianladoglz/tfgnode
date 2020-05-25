@@ -39,7 +39,7 @@ module.exports = {
         var dbManager = this.DBManager;
         var msg = this.message;
 
-        this.DBManager.getPlayers({teamName:player.teamName , playerBib:player.playerBib}, function(players) {
+        this.DBManager.getPlayers({teamName:player.teamName , playerBib:parseInt(player.playerBib)}, function(players) {
             dbManager.getTeams({teamName: player.teamName} , function(teams){
                 if (players.length > 0)
                     msg = "El dorsal ya existe en ese equipo";

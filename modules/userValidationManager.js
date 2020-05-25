@@ -25,7 +25,9 @@ module.exports = {
     },
 
     login : function(user, funcionCallback) {
+        this.message = null;
         this.DBManager.getUsers({userName: user.userName}, function(users) {
+            this.message = null;
            if(users.length === 0)
                this.message="Usuario o password incorrecto";
             if(users[0] != null || users[0] != undefined)
