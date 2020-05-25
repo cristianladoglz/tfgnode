@@ -7,7 +7,7 @@ DBManager.init(appjs.app, appjs.mongo);
 var userValidationManager = require("../../modules/userValidationManager.js");
 userValidationManager.init(appjs.app,DBManager);
 
-describe('Team creation', function() {
+describe('Users', function() {
     describe('Correct sign up', function() {
         it('message should be null', function() {
             var correctUser = { userName: "correctUser", password: "1234", passwordConfirm: "1234" };

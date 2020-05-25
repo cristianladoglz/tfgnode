@@ -20,7 +20,7 @@ describe('Match creation', function() {
                 date : "2020-01-01",
                 time : "00:00",
                 matchCourt : "test",
-                tableOfficial : "",
+                tableOfficial : "none",
                 state : "created"};
             matchValidationManager.matchCreation(correctMatch, function (msg) {
                 assert.equal(msg, null);
@@ -36,7 +36,7 @@ describe('Match creation', function() {
                         date : "2020-01-01",
                         time : "00:00",
                         matchCourt : "test",
-                        tableOfficial : "",
+                        tableOfficial : "none",
                         state : "created"};
                     matchValidationManager.matchCreation(correctMatch, function (msg) {
                         assert.equal(msg, "El número de cuartos debe ser mínimo 1");
@@ -53,7 +53,7 @@ describe('Match creation', function() {
                                 date: "2020-01-01",
                                 time: "00:00",
                                 matchCourt: "test",
-                                tableOfficial: "",
+                                tableOfficial: "none",
                                 state: "created"
                             };
                             matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -71,7 +71,7 @@ describe('Match creation', function() {
                                         date: "2020-01-01",
                                         time: "00:00",
                                         matchCourt: "test",
-                                        tableOfficial: "",
+                                        tableOfficial: "none",
                                         state: "created"
                                     };
                                     matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -89,7 +89,7 @@ describe('Match creation', function() {
                                                 date: "2020-01-01",
                                                 time: "00:00",
                                                 matchCourt: "test",
-                                                tableOfficial: "",
+                                                tableOfficial: "none",
                                                 state: "created"
                                             };
                                             matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -107,7 +107,7 @@ describe('Match creation', function() {
                                                         date: "2020-01-01",
                                                         time: "00:00",
                                                         matchCourt: "test",
-                                                        tableOfficial: "",
+                                                        tableOfficial: "none",
                                                         state: "created"
                                                     };
                                                     matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -125,7 +125,7 @@ describe('Match creation', function() {
                                                                 date: "2020-01-01",
                                                                 time: "00:00",
                                                                 matchCourt: "test",
-                                                                tableOfficial: "",
+                                                                tableOfficial: "none",
                                                                 state: "created"
                                                             };
                                                             matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -143,7 +143,7 @@ describe('Match creation', function() {
                                                                         date: "2020-01-01",
                                                                         time: "00:00",
                                                                         matchCourt: "test",
-                                                                        tableOfficial: "",
+                                                                        tableOfficial: "none",
                                                                         state: "created"
                                                                     };
                                                                     matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -161,7 +161,7 @@ describe('Match creation', function() {
                                                                                 date: "2020-01-01",
                                                                                 time: "00:00",
                                                                                 matchCourt: "test",
-                                                                                tableOfficial: "",
+                                                                                tableOfficial: "none",
                                                                                 state: "created"
                                                                             };
                                                                             matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -179,7 +179,7 @@ describe('Match creation', function() {
                                                                                         date: "2020-01-01",
                                                                                         time: "00:00",
                                                                                         matchCourt: "test",
-                                                                                        tableOfficial: "",
+                                                                                        tableOfficial: "none",
                                                                                         state: "created"
                                                                                     };
                                                                                     matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -197,7 +197,7 @@ describe('Match creation', function() {
                                                                                                 date: "2020-01-01",
                                                                                                 time: "00:00",
                                                                                                 matchCourt: "test",
-                                                                                                tableOfficial: "",
+                                                                                                tableOfficial: "none",
                                                                                                 state: "created"
                                                                                             };
                                                                                             matchValidationManager.matchCreation(correctMatch, function(msg){
@@ -215,7 +215,7 @@ describe('Match creation', function() {
                                                                                                         date: "2020-01-01",
                                                                                                         time: "00:00",
                                                                                                         matchCourt: "test",
-                                                                                                        tableOfficial: "",
+                                                                                                        tableOfficial: "none",
                                                                                                         state: "created"
                                                                                                     };
                                                                                                     matchValidationManager.matchCreation(correctMatch, function(msg){
@@ -233,7 +233,7 @@ describe('Match creation', function() {
                                                                                                                 date: "2020-01-01",
                                                                                                                 time: "00:00",
                                                                                                                 matchCourt: "test",
-                                                                                                                tableOfficial: "",
+                                                                                                                tableOfficial: "none",
                                                                                                                 state: "created"
                                                                                                             };
                                                                                                             matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -251,7 +251,7 @@ describe('Match creation', function() {
                                                                                                                         date: "2020-01-01",
                                                                                                                         time: "00:00",
                                                                                                                         matchCourt: "test",
-                                                                                                                        tableOfficial: "",
+                                                                                                                        tableOfficial: "none",
                                                                                                                         state: "created"
                                                                                                                     };
                                                                                                                     matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -269,7 +269,7 @@ describe('Match creation', function() {
                                                                                                                                 date: "2020-01-01",
                                                                                                                                 time: "00:00",
                                                                                                                                 matchCourt: "test",
-                                                                                                                                tableOfficial: "",
+                                                                                                                                tableOfficial: "none",
                                                                                                                                 state: "created"
                                                                                                                             };
                                                                                                                             matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -287,7 +287,7 @@ describe('Match creation', function() {
                                                                                                                                         date: "2020-01-01",
                                                                                                                                         time: "00:00",
                                                                                                                                         matchCourt: "test",
-                                                                                                                                        tableOfficial: "",
+                                                                                                                                        tableOfficial: "none",
                                                                                                                                         state: "created"
                                                                                                                                     };
                                                                                                                                     matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -305,7 +305,7 @@ describe('Match creation', function() {
                                                                                                                                                 date: "2020-01-01",
                                                                                                                                                 time: "00:00",
                                                                                                                                                 matchCourt: "",
-                                                                                                                                                tableOfficial: "",
+                                                                                                                                                tableOfficial: "none",
                                                                                                                                                 state: "created"
                                                                                                                                             };
                                                                                                                                             matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -323,7 +323,7 @@ describe('Match creation', function() {
                                                                                                                                                         date: "",
                                                                                                                                                         time: "00:00",
                                                                                                                                                         matchCourt: "test",
-                                                                                                                                                        tableOfficial: "",
+                                                                                                                                                        tableOfficial: "none",
                                                                                                                                                         state: "created"
                                                                                                                                                     };
                                                                                                                                                     matchValidationManager.matchCreation(correctMatch, function (msg) {
@@ -341,7 +341,7 @@ describe('Match creation', function() {
                                                                                                                                                                 date: "2020-01-01",
                                                                                                                                                                 time: "",
                                                                                                                                                                 matchCourt: "test",
-                                                                                                                                                                tableOfficial: "",
+                                                                                                                                                                tableOfficial: "none",
                                                                                                                                                                 state: "created"
                                                                                                                                                             };
                                                                                                                                                             matchValidationManager.matchCreation(correctMatch, function (msg) {
