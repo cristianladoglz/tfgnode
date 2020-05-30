@@ -19,3 +19,7 @@ select {
   color: #fff;
 }
 
+.navbar-header img {
+  width: 60px;
+  height: 100px
+}
