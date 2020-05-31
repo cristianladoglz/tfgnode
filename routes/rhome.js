@@ -5,6 +5,9 @@ module.exports = function(app, swig, DBManager) {
         return swig.renderFile(file, variables);
     }
 
+    /**
+     * Go to the main view if there is an user in session or redirect to login
+     */
     app.get("/", function(req, res) {
         if(req.session.user!=null) {
             var criterion = {userName: req.session.user.userName};

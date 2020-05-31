@@ -9,6 +9,11 @@ module.exports = {
         this.app = app;
     },
 
+    /**
+     * Validation for creating a match
+     * @param match to create
+     * @param funcionCallback
+     */
     matchCreation : function(match,funcionCallback) {
         var dbManager=this.DBManager;
         var msg=this.message;

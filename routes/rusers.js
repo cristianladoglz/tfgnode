@@ -5,11 +5,17 @@ module.exports = function(app, swig, DBManager, validationManager) {
         return swig.renderFile(file, variables);
     }
 
+    /**
+     * Go to the sign up view
+     */
     app.get("/registro", function(req, res) {
         var response = showView('views/signUp.html', {}, req.session);
         res.send(response);
     });
 
+    /**
+     * Register an user with values from the form
+     */
     app.post("/user", function(req, res) {
         var validateUser = {
             userName : req.body.userName,
@@ -43,11 +49,17 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Go to the sign in view
+     */
     app.get("/inicioSesion", function(req, res) {
         var response = showView('views/signIn.html', {}, req.session);
         res.send(response);
     });
 
+    /**
+     * Login an user with values from the form
+     */
     app.post("/signIn", function(req, res) {
         var lock = app.get("crypto").createHmac('sha256', app.get('clave'))
             .update(req.body.password).digest('hex');
@@ -68,6 +80,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Remove session user and go to login view
+     */
     app.get('/cerrarSesion', function (req, res) {
         req.session.user = null;
         res.redirect("/inicioSesion");

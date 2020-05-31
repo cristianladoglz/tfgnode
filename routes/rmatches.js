@@ -5,6 +5,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         return swig.renderFile(file, variables);
     }
 
+    /**
+     * Go to the create a match view
+     */
     app.get("/match/add", function(req, res) {
         var criterion={};
 
@@ -24,6 +27,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Create a match with values from the form
+     */
     app.post("/match", function(req, res) {
         var validateMatch = {
             localTeam : req.body.local.valueOf(),
@@ -85,6 +91,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * List user's matches
+     */
     app.get("/match/mine", function(req, res) {
         var criterion={userName: req.session.user.userName};
 
@@ -98,6 +107,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Activate match whose id is included in the route
+     */
     app.get('/match/activate/:id', function (req, res) {
         var matchId = DBManager.mongo.ObjectID(req.params.id);
         var user = req.session.user;
@@ -115,6 +127,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Go to the modify a match view
+     */
     app.get('/match/modify/:id', function (req, res) {
         var matchId = DBManager.mongo.ObjectID(req.params.id);
         var user = req.session.usuario;
@@ -143,6 +158,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Modify a match with values from the form
+     */
     app.post("/match/:id", function(req, res) {
         var validateMatch = {
             _id : req.params.id,

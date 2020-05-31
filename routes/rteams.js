@@ -5,11 +5,17 @@ module.exports = function(app, swig, DBManager, validationManager) {
         return swig.renderFile(file, variables);
     }
 
+    /**
+     * Go to the create a team view
+     */
     app.get("/team/add", function(req,res) {
         var respuesta = swig.renderFile('views/addTeam.html', { user: req.session.user });
         res.send(respuesta);
     });
 
+    /**
+     * Create a team with values from the form
+     */
     app.post("/team", function(req, res) {
         var validateTeam = {
             teamName : req.body.name,
@@ -40,6 +46,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Go to the create a coach view
+     */
     app.get("/coach/add", function(req,res) {
         var criterion={};
 
@@ -53,6 +62,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Create a coach with values from the form
+     */
     app.post("/coach", function(req, res) {
         var validateCoach = {
             coachName : req.body.coach,
@@ -82,6 +94,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Go to the create a player view
+     */
     app.get("/player/add", function(req,res) {
         var criterion={};
 
@@ -95,6 +110,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Create a player with values from the form
+     */
     app.post("/player", function(req, res) {
         var validatePlayer = {
             playerName : req.body.player,
@@ -126,6 +144,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * List all teams
+     */
     app.get("/team/list", function(req, res) {
         var criterion={};
 
@@ -139,6 +160,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
         });
     });
 
+    /**
+     * Delete team whose id is included in the route
+     */
     app.get('/team/delete/:id', function (req, res) {
         var criterion = {_id: DBManager.mongo.ObjectID(req.params.id)};
         DBManager.getTeams(criterion, function(teams){

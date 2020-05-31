@@ -9,6 +9,11 @@ module.exports = {
         this.app = app;
     },
 
+    /**
+     * Validation for register an user
+     * @param user to register
+     * @param funcionCallback
+     */
     userRegister : function(user, funcionCallback) {
         this.DBManager.getUsers({userName:user.userName}, function(users) {
             if (users.length > 0)
@@ -24,6 +29,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Validation for login an user
+     * @param user to login
+     * @param funcionCallback
+     */
     login : function(user, funcionCallback) {
         this.message = null;
         this.DBManager.getUsers({userName: user.userName}, function(users) {

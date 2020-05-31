@@ -32,6 +32,12 @@ module.exports = {
     },
 
     //Users management
+
+    /**
+     * Get users by a given criteria
+     * @param criterion for filtering
+     * @param funcionCallback
+     */
     getUsers : function(criterion,funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -50,6 +56,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Insert an user
+     * @param user to insert
+     * @param funcionCallback
+     */
     insertUser : function(user, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -69,6 +80,12 @@ module.exports = {
     },
 
     //Teams management
+
+    /**
+     * Get teams by a given criteria
+     * @param criterion for filtering
+     * @param funcionCallback
+     */
     getTeams : function(criterion, funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -87,6 +104,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Insert a team
+     * @param team to insert
+     * @param funcionCallback
+     */
     insertTeam : function(team, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -105,6 +127,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Get coaches by a given criteria
+     * @param criterion for filtering
+     * @param funcionCallback
+     */
     getCoaches : function(criterion,funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -123,6 +150,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Insert a coach
+     * @param coach to insert
+     * @param funcionCallback
+     */
     insertCoach : function(coach, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -141,6 +173,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Get players by a given criteria
+     * @param criterion for filtering
+     * @param funcionCallback
+     */
     getPlayers : function(criterion,funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -159,6 +196,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Insert a player
+     * @param player to insert
+     * @param funcionCallback
+     */
     insertPlayer : function(player, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -177,6 +219,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Delete a team by a given criteria
+     * @param criterion for filtering
+     * @param funcionCallback
+     */
     deleteTeam : function(criterion, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
             if (err) {
@@ -196,6 +243,12 @@ module.exports = {
     },
 
     //Matches management
+
+    /**
+     * Get matches by a given criteria
+     * @param criterion for filtering
+     * @param funcionCallback
+     */
     getMatches : function(criterion,funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -214,6 +267,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Insert a match
+     * @param match to insert
+     * @param funcionCallback
+     */
     insertMatch : function(match, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -232,6 +290,12 @@ module.exports = {
         });
     },
 
+    /**
+     * Modify a match
+     * @param criterion to find the match
+     * @param match to modify
+     * @param funcionCallback
+     */
     modifyMatch : function(criterion, match, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -250,6 +314,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Insert summary of a player in a match
+     * @param record summary to insert
+     * @param funcionCallback
+     */
     recordMatch : function(record, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -269,6 +338,12 @@ module.exports = {
     },
 
     //API: Gestión de eventos
+
+    /**
+     * Insert an event from a match
+     * @param event to insert
+     * @param funcionCallback
+     */
     insertEvent : function(event, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -287,6 +362,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Get events by a given criteria
+     * @param criterion for filtering
+     * @param funcionCallback
+     */
     getEvents : function(criterion,funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
@@ -305,6 +385,11 @@ module.exports = {
         });
     },
 
+    /**
+     * Get summary of a player from a match
+     * @param criterion for filtering
+     * @param funcionCallback
+     */
     getRecords : function(criterion,funcionCallback){
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {

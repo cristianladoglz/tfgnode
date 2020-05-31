@@ -9,6 +9,11 @@ module.exports = {
         this.app = app;
     },
 
+    /**
+     * Validation for creating a team
+     * @param team to create
+     * @param funcionCallback
+     */
     teamCreation : function(team,funcionCallback) {
         this.DBManager.getTeams({teamName:team.teamName}, function(teams) {
             if (teams.length > 0)
@@ -22,6 +27,11 @@ module.exports = {
         this.message=null;
     },
 
+    /**
+     * Validation for creating a coach
+     * @param coach to create
+     * @param funcionCallback
+     */
     coachAddition : function(coach,funcionCallback) {
         this.DBManager.getTeams({teamName : coach.teamName}, function(teams) {
             if (teams.length === 0)
@@ -35,6 +45,11 @@ module.exports = {
         this.message=null;
     },
 
+    /**
+     * Validation for creating a player
+     * @param player to create
+     * @param funcionCallback
+     */
     playerAddition : function(player,funcionCallback) {
         var dbManager = this.DBManager;
         var msg = this.message;
