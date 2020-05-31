@@ -1,3 +1,9 @@
+/**
+ * @module routes/rhome
+ * @param app
+ * @param swig
+ * @param DBManager
+ */
 module.exports = function(app, swig, DBManager) {
 
     function showView(file, variables, session){
