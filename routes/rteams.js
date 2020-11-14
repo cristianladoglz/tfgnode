@@ -135,9 +135,9 @@ module.exports = function(app, swig, DBManager, validationManager) {
             }else {
 
                 var player = {
-                    teamName : req.body.teamName,
-                    playerName : req.body.player,
-                    playerBib : parseInt(req.body.bib)
+                    teamName: req.body.teamName,
+                    playerName: req.body.player,
+                    playerBib: parseInt(req.body.bib)
                 };
 
                 DBManager.insertPlayer(player, function (id) {

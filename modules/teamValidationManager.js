@@ -61,14 +61,12 @@ module.exports = {
 
         this.DBManager.getPlayers({teamName:player.teamName , playerBib:parseInt(player.playerBib)}, function(players) {
             dbManager.getTeams({teamName: player.teamName} , function(teams){
-                if (players.length > 0)
+                if (players.length > 0 && player.playerBib!=="")
                     msg = "El dorsal ya existe en ese equipo";
                 else if (teams.length == 0)
                     msg = "El equipo no existe";
                 else if (player.playerName == "")
                     msg = "Campo nombre de jugador vacio";
-                else if (player.playerBib == "")
-                    msg = "Campo dorsal vacio";
                 else if (player.playerBib < 0)
                     msg = "Dorsal negativo";
                 else if (player.playerBib > 99)
